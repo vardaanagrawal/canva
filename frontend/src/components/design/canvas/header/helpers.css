@@ -1,0 +1,139 @@
+.header-divider {
+  border: solid whitesmoke 1px;
+  height: 25px;
+  border-radius: 2px;
+}
+/* =========================================================================== */
+/* =========================================================================== */
+.header-btn {
+  height: 35px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+.header-btn:hover,
+.header-font-btn:hover,
+.font-sign-btn:hover {
+  background-color: rgb(245, 245, 245);
+}
+.header-btn:active,
+.header-font-btn:active,
+.font-sign-btn:active {
+  background-color: rgb(235, 235, 235);
+}
+/* =========================================================================== */
+/* =========================================================================== */
+
+.header-bg-color-btn {
+  height: 35px;
+  width: 35px;
+}
+.header-bg-color {
+  height: 25px;
+  width: 25px;
+  border-radius: 3px;
+  background-image: url("https://static.canva.com/web/images/788ee7a68293bd0264fc31f22c31e62d.png");
+  background-size: 100% 100%;
+}
+/* =========================================================================== */
+/* =========================================================================== */
+
+.header-font-btn,
+.header-font-size-btn {
+  height: 30px;
+  width: 170px;
+  border: solid silver 1px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0px 5px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.header-font-size-btn {
+  width: auto;
+  padding: 0px 0px;
+}
+.font-sign-btn {
+  height: 100%;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.font-size-input {
+  height: 100%;
+  width: 30px;
+  border: none;
+  text-align: center;
+  border-left: solid silver 1px;
+  border-right: solid silver 1px;
+  padding: 0px 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.font-size-input:focus {
+  outline: none;
+}
+
+/* =========================================================================== */
+/* =========================================================================== */
+
+.font-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  /* background-color: red; */
+  height: 30px;
+}
+.font-edit-row .header-btn {
+  height: 30px;
+  width: 30px;
+  padding: 0px;
+  justify-content: center;
+  text-align: center;
+  gap: 0px;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 22px;
+}
+.text-color-btn {
+  font-size: 18px !important;
+}
+.text-color {
+  height: 3px;
+  width: 20px;
+  background-image: url("https://static.canva.com/web/images/75f2be76da4524599a99a9f6c164e71d.png");
+  background-size: 100% 100%;
+  border-radius: 10px;
+}
+.bold-btn {
+  font-weight: 900 !important;
+}
+.italic-btn {
+  font-style: italic;
+}
+.underline-btn {
+  text-decoration: underline;
+}
+.bold-btn-selected {
+  font-weight: 900 !important;
+  background-color: rgb(235, 235, 235);
+}
+.italic-btn-selected {
+  font-style: italic;
+  background-color: rgb(235, 235, 235);
+}
+.underline-btn-selected {
+  text-decoration: underline;
+  background-color: rgb(235, 235, 235);
+}

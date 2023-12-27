@@ -1,0 +1,270 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showSidebar2 } from "../../../../redux/actions/sidebar2Actions";
+import {
+  setSelectedComponent,
+  updateSelectedComponent,
+} from "../../../../redux/actions/selectedComponentActions";
+import {
+  addComponent,
+  deleteComponent,
+} from "../../../../redux/actions/currentProjectActions";
+
+export function HeaderDivider() {
+  return <div className="header-divider"></div>;
+}
+
+export function PositionButton() {
+  const dispatch = useDispatch();
+  return (
+    <div
+      className="header-btn"
+      onClick={() => {
+        dispatch(
+          showSidebar2({
+            visible: true,
+            type: "position",
+          })
+        );
+      }}
+    >
+      Position
+    </div>
+  );
+}
+
+export function ShapeButton() {
+  const dispatch = useDispatch();
+  return (
+    <div
+      className="header-btn"
+      onClick={() => {
+        dispatch(
+          showSidebar2({
+            visible: true,
+            type: "shapes",
+            mode: "edit",
+          })
+        );
+      }}
+    >
+      <i className="fa-solid fa-shapes"></i> Shape
+    </div>
+  );
+}
+
+export function BgColorButton() {
+  const dispatch = useDispatch();
+  return (
+    <div
+      className="header-btn"
+      onClick={() => {
+        dispatch(
+          showSidebar2({
+            visible: true,
+            type: "color",
+          })
+        );
+      }}
+    >
+      <div className="header-bg-color"></div>
+    </div>
+  );
+}
+
+export function FontFamilyButton() {
+  const dispatch = useDispatch();
+  const selected_component = useSelector((state) => state.selected_component);
+  const current_project = useSelector((state) => state.current_project);
+  const [font_family, setFontFamily] = useState(selected_component.font_family);
+  useEffect(() => {
+    const cur_component = current_project.components.filter(
+      (x) => x._id === selected_component._id
+    )[0];
+    setFontFamily(cur_component.font_family);
+  }, [current_project]);
+  return (
+    <div
+      className="header-font-btn"
+      onClick={() => {
+        dispatch(
+          showSidebar2({
+            visible: true,
+            type: "text",
+            mode: "edit",
+          })
+        );
+      }}
+    >
+      {font_family}
+    </div>
+  );
+}
+
+export function FontSizeButton() {
+  const dispatch = useDispatch();
+  const selected_component = useSelector((state) => state.selected_component);
+  const [font_size, setFontSize] = useState(selected_component.font_size);
+  useEffect(() => {
+    setFontSize(selected_component.font_size);
+  }, [selected_component]);
+  useEffect(() => {
+    dispatch(
+      updateSelectedComponent(selected_component._id, {
+        font_size,
+      })
+    );
+  }, [font_size]);
+
+  return (
+    <div className="header-font-size-btn">
+      <div
+        className="font-sign-btn"
+        onClick={() => {
+          setFontSize(font_size - 1);
+        }}
+      >
+        -
+      </div>
+      <input
+        className="font-size-input"
+        value={font_size}
+        onChange={(e) => {
+          setFontSize(e.target.value);
+        }}
+      ></input>
+      <div
+        className="font-sign-btn"
+        onClick={() => {
+          setFontSize(font_size + 1);
+        }}
+      >
+        +
+      </div>
+    </div>
+  );
+}
+
+export function FontEditRow() {
+  const dispatch = useDispatch();
+  const selected_component = useSelector((state) => state.selected_component);
+  const [bold, setBold] = useState(selected_component.text_bold);
+  const [italic, setItalic] = useState(selected_component.text_italic);
+  const [underline, setUnderline] = useState(selected_component.text_underline);
+  useEffect(() => {
+    setBold(selected_component.text_bold);
+    setItalic(selected_component.text_italic);
+    setUnderline(selected_component.text_underline);
+  }, [selected_component]);
+  useEffect(() => {
+    dispatch(
+      updateSelectedComponent(selected_component._id, {
+        text_bold: bold,
+        text_italic: italic,
+        text_underline: underline,
+      })
+    );
+  }, [bold, italic, underline]);
+
+  return (
+    <div className="font-edit-row">
+      <div
+        className="text-color-btn header-btn"
+        onClick={() => {
+          dispatch(
+            showSidebar2({
+              visible: true,
+              type: "color",
+            })
+          );
+        }}
+      >
+        A<div className="text-color"></div>
+      </div>
+      <div
+        className={`header-btn ${bold ? "bold-btn-selected" : "bold-btn"}`}
+        onClick={() => {
+          setBold(!bold);
+        }}
+      >
+        B
+      </div>
+      <div
+        className={`header-btn ${
+          italic ? "italic-btn-selected" : "italic-btn"
+        }`}
+        onClick={() => {
+          setItalic(!italic);
+        }}
+      >
+        I
+      </div>
+      <div
+        className={`header-btn ${
+          underline ? "underline-btn-selected" : "underline-btn"
+        }`}
+        onClick={() => {
+          setUnderline(!underline);
+        }}
+      >
+        U
+      </div>
+    </div>
+  );
+}
+
+export function EditPhotoButton() {
+  return <div className="header-btn">Edit Photo</div>;
+}
+
+export function DuplicateButton() {
+  const dispatch = useDispatch();
+  const selected_component = useSelector((state) => state.selected_component);
+  const current_project = useSelector((state) => state.current_project);
+  function duplicate() {
+    const id = Math.floor(Math.random() * 900) + 100;
+    const a = current_project.components.filter(
+      (x) => x._id === selected_component._id
+    )[0];
+    addItem({
+      ...a,
+      _id: id,
+      x: selected_component.x + 20,
+      y: selected_component.y + 20,
+    });
+  }
+
+  function addItem(item) {
+    dispatch(addComponent(item));
+    dispatch(setSelectedComponent(item));
+  }
+
+  return (
+    <div
+      className="header-btn"
+      onClick={() => {
+        duplicate();
+      }}
+    >
+      <i className="fa-regular fa-copy"></i>
+    </div>
+  );
+}
+export function DeleteButton() {
+  const dispatch = useDispatch();
+  const selected_component = useSelector((state) => state.selected_component);
+  async function deleteItem() {
+    dispatch(deleteComponent({ _id: selected_component._id }));
+    dispatch(setSelectedComponent({ _id: "", component_type: 0 }));
+  }
+  return (
+    <div
+      className="header-btn"
+      onClick={() => {
+        deleteItem();
+      }}
+    >
+      <i className="fa-solid fa-trash-can"></i>
+    </div>
+  );
+}

@@ -1,0 +1,8 @@
+.canvas-footer {
+  height: 49px;
+  border-top: solid silver 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 10px;
+}

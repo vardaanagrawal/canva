@@ -1,0 +1,14 @@
+.dashboard {
+  min-height: 100vh;
+  background-color: whitesmoke;
+}
+.dashboard-bottom {
+  /* height: calc(100vh - 71px); */
+  padding-top: 71px;
+  display: flex;
+}
+
+.outlet {
+  height: 100%;
+  width: 100%;
+}

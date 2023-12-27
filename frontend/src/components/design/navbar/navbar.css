@@ -1,0 +1,67 @@
+.design-navbar {
+  height: 50px;
+  background-color: rgb(139 61 255 / 70%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 2vw;
+}
+.dn-left-menu,
+.dn-right-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dn-title input {
+  color: white;
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  min-width: 1px;
+  height: 35px;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+.dn-title input::placeholder {
+  color: whitesmoke;
+}
+.dn-title input:focus {
+  outline: none;
+  border: solid whitesmoke 1px;
+}
+.dn-save-btn {
+  background-color: #8b3dff;
+  color: white;
+  height: 35px;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dn-save-btn:hover {
+  background-color: #7d38e4;
+}
+.dn-save-btn:active {
+  background-color: #692ac9;
+}
+
+.dn-share-btn {
+  background-color: white;
+  height: 35px;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dn-share-btn:hover {
+  background-color: whitesmoke;
+}
+.dn-share-btn:active {
+  background-color: silver;
+}
