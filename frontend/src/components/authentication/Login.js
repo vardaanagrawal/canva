@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./auth.css";
 import { login } from "../../api";
+import login_bg from "../../images/login_bg.avif";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,35 +19,48 @@ export default function Login() {
   }
 
   return (
-    <div className="auth">
-      <div className="auth-box">
-        <div className="auth-title">Login</div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleLogin();
-          }}
-        >
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
+    <div
+      className="auth"
+      style={{
+        backgroundImage: `url(${login_bg})`,
+        backgroundSize: "100% auto",
+      }}
+    >
+      <div className="auth-inner">
+        <div className="auth-logo">
+          <img src="https://static.canva.com/web/images/856bac30504ecac8dbd38dbee61de1f1.svg"></img>
+        </div>
+        <div className="auth-box">
+          <div className="auth-title">Login</div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
             }}
-            required
-          ></input>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            required
-          ></input>
-          <input type="submit" value="Login" className="submit-btn"></input>
-        </form>
+          >
+            <label>Email</label>
+            <input
+              placeholder="Email"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
+            ></input>
+            <label>Password</label>
+            <input
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+            ></input>
+            <input type="submit" value="Login" className="submit-btn"></input>
+          </form>
+        </div>
       </div>
     </div>
   );

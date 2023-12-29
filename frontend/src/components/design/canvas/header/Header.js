@@ -19,17 +19,11 @@ export default function Header() {
   const selected_component = useSelector((state) => state.selected_component);
   return (
     <div className="canvas-header">
-      {selected_component.component_type === 0 ? (
-        <Type0 />
-      ) : selected_component.component_type === 2 ? (
-        <Type2 />
-      ) : selected_component.component_type === 3 ? (
-        <Type3 />
-      ) : selected_component.component_type === 4 ? (
-        <Type4 />
-      ) : (
-        selected_component.component_type === 1 && <Type1 />
-      )}
+      {selected_component.component_type === 0 && <Type0 />}
+      {selected_component.component_type === 1 && <Type1 />}
+      {selected_component.component_type === 2 && <Type2 />}
+      {selected_component.component_type === 3 && <Type3 />}
+      {selected_component.component_type === 4 && <Type4 />}
     </div>
   );
 }

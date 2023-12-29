@@ -1,13 +1,35 @@
 import React from "react";
-import { images } from "../utils";
+import { manageElement } from "../../../../redux/actions/currentProjectActions";
 import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
-import { addComponent } from "../../../../redux/actions/currentProjectActions";
 import { useDispatch } from "react-redux";
+import { images } from "../utils";
 
 export default function ImageSidebar() {
   const dispatch = useDispatch();
+
+  function handleClick(item) {
+    // creating a temp id for the new image
+    const id = Math.floor(Math.random() * 900) + 100;
+    addItem({
+      ...item,
+      _id: id,
+      component_type: 4,
+      x: 100,
+      y: 100,
+    });
+  }
+
   function addItem(item) {
-    dispatch(addComponent(item));
+    // adding the component in the components array of the current project
+    dispatch(
+      manageElement({
+        action: "add",
+        element: "component",
+        method: "change",
+        item: item,
+      })
+    );
+    // setting the newly added component as the selected component
     dispatch(setSelectedComponent(item));
   }
   return (
@@ -17,21 +39,12 @@ export default function ImageSidebar() {
         <div className="images-sidebar-body-left">
           {images.map(
             (item, index) =>
-              index % 2 == 1 && (
+              index % 2 == 0 && (
                 <div className="images-sidebar-item" key={index}>
                   <div
                     className="image-sample"
                     onClick={() => {
-                      const id = Math.floor(Math.random() * 900) + 100;
-                      addItem({
-                        ...item,
-                        _id: id,
-                        component_type: 4,
-                        height: 100,
-                        width: 100,
-                        x: 100,
-                        y: 100,
-                      });
+                      handleClick(item);
                     }}
                   >
                     <img src={item.image_url}></img>
@@ -43,21 +56,12 @@ export default function ImageSidebar() {
         <div className="images-sidebar-body-left">
           {images.map(
             (item, index) =>
-              index % 2 == 0 && (
+              index % 2 == 1 && (
                 <div className="images-sidebar-item" key={index}>
                   <div
                     className="image-sample"
                     onClick={() => {
-                      const id = Math.floor(Math.random() * 900) + 100;
-                      addItem({
-                        ...item,
-                        _id: id,
-                        component_type: 4,
-                        height: 100,
-                        width: 100,
-                        x: 100,
-                        y: 100,
-                      });
+                      handleClick(item);
                     }}
                   >
                     <img src={item.image_url}></img>

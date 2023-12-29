@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showSidebar2 } from "../../../../redux/actions/sidebar2Actions";
-import {
-  setSelectedComponent,
-  updateSelectedComponent,
-} from "../../../../redux/actions/selectedComponentActions";
-import {
-  addComponent,
-  deleteComponent,
-} from "../../../../redux/actions/currentProjectActions";
+import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+import { manageElement } from "../../../../redux/actions/currentProjectActions";
 
 export function HeaderDivider() {
   return <div className="header-divider"></div>;
@@ -81,7 +75,7 @@ export function FontFamilyButton() {
     const cur_component = current_project.components.filter(
       (x) => x._id === selected_component._id
     )[0];
-    setFontFamily(cur_component.font_family);
+    setFontFamily(cur_component.font_name);
   }, [current_project]);
   return (
     <div
@@ -105,13 +99,25 @@ export function FontSizeButton() {
   const dispatch = useDispatch();
   const selected_component = useSelector((state) => state.selected_component);
   const [font_size, setFontSize] = useState(selected_component.font_size);
+  const components = useSelector((state) => state.current_project.components);
+
   useEffect(() => {
     setFontSize(selected_component.font_size);
   }, [selected_component]);
   useEffect(() => {
+    const index = components.findIndex(
+      (obj) => obj._id === selected_component._id
+    );
     dispatch(
-      updateSelectedComponent(selected_component._id, {
-        font_size,
+      manageElement({
+        action: "update",
+        element: "component",
+        method: "change",
+        prev_state: components[index],
+        new_state: {
+          _id: components[index]._id,
+          font_size,
+        },
       })
     );
   }, [font_size]);
@@ -151,17 +157,29 @@ export function FontEditRow() {
   const [bold, setBold] = useState(selected_component.text_bold);
   const [italic, setItalic] = useState(selected_component.text_italic);
   const [underline, setUnderline] = useState(selected_component.text_underline);
+  const components = useSelector((state) => state.current_project.components);
+
   useEffect(() => {
     setBold(selected_component.text_bold);
     setItalic(selected_component.text_italic);
     setUnderline(selected_component.text_underline);
   }, [selected_component]);
   useEffect(() => {
+    const index = components.findIndex(
+      (obj) => obj._id === selected_component._id
+    );
     dispatch(
-      updateSelectedComponent(selected_component._id, {
-        text_bold: bold,
-        text_italic: italic,
-        text_underline: underline,
+      manageElement({
+        action: "update",
+        element: "component",
+        method: "change",
+        prev_state: components[index],
+        new_state: {
+          _id: components[index]._id,
+          text_bold: bold,
+          text_italic: italic,
+          text_underline: underline,
+        },
       })
     );
   }, [bold, italic, underline]);
@@ -235,7 +253,14 @@ export function DuplicateButton() {
   }
 
   function addItem(item) {
-    dispatch(addComponent(item));
+    dispatch(
+      manageElement({
+        action: "add",
+        element: "component",
+        method: "change",
+        item: item,
+      })
+    );
     dispatch(setSelectedComponent(item));
   }
 
@@ -253,8 +278,21 @@ export function DuplicateButton() {
 export function DeleteButton() {
   const dispatch = useDispatch();
   const selected_component = useSelector((state) => state.selected_component);
+  const components = useSelector((state) => state.current_project.components);
+
   async function deleteItem() {
-    dispatch(deleteComponent({ _id: selected_component._id }));
+    const index = components.findIndex(
+      (obj) => obj._id === selected_component._id
+    );
+    dispatch(
+      manageElement({
+        action: "delete",
+        element: "component",
+        method: "change",
+        item: components[index],
+      })
+    );
+    // dispatch(deleteComponent({ _id: selected_component._id }));
     dispatch(setSelectedComponent({ _id: "", component_type: 0 }));
   }
   return (

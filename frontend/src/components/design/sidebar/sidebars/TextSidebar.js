@@ -1,55 +1,87 @@
 import React from "react";
-import { font_styles } from "../utils";
-import { addComponent } from "../../../../redux/actions/currentProjectActions";
-import {
-  setSelectedComponent,
-  updateSelectedComponent,
-} from "../../../../redux/actions/selectedComponentActions";
+import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
 import { useDispatch, useSelector } from "react-redux";
+import { font_styles } from "../utils";
+import { manageElement } from "../../../../redux/actions/currentProjectActions";
 
 export default function TextSidebar() {
   const dispatch = useDispatch();
-  function addItem(item) {
-    dispatch(addComponent(item));
-    dispatch(setSelectedComponent(item));
-  }
-
   const sidebar2 = useSelector((state) => state.sidebar2);
   const selected_component = useSelector((state) => state.selected_component);
+  const components = useSelector((state) => state.current_project.components);
+
   function handleClick(item) {
+    // if new text box is to be added
     if (sidebar2.mode === "new") {
+      // creating a temp id for the new text box
       const id = Math.floor(Math.random() * 900) + 100;
       addItem({
         ...item,
         _id: id,
         component_type: 3,
         text: "Write here...",
-        color: "black",
+        font_color: "black",
         x: 100,
         y: 100,
         text_bold: false,
         text_italic: false,
         text_underline: false,
+        height: 150,
+        width: 250,
       });
-    } else {
+    }
+    // if font family of the existing text box is to be changed
+    else {
+      // dispatch(
+      //   updateSelectedComponent(selected_component._id, {
+      //     font_family: item.font_family,
+      //   })
+      // );
+      const index = components.findIndex(
+        (obj) => obj._id === selected_component._id
+      );
       dispatch(
-        updateSelectedComponent(selected_component._id, {
-          font_family: item.font_family,
+        manageElement({
+          action: "update",
+          element: "component",
+          method: "change",
+          prev_state: components[index],
+          new_state: {
+            _id: components[index]._id,
+            font_family: item.font_family,
+          },
         })
       );
     }
   }
+
+  function addItem(item) {
+    // adding the component in the components array of the current project
+    // dispatch(addComponent(item));
+    dispatch(
+      manageElement({
+        action: "add",
+        element: "component",
+        method: "change",
+        item: item,
+      })
+    );
+    // setting the newly added component as the selected component
+    dispatch(setSelectedComponent(item));
+  }
   return (
     <div className="sidebar2-inner">
-      <div className="sidebar2-title">Fonts</div>
+      <div className="sidebar2-title">
+        {sidebar2.mode === "new" ? "Add New Textbox" : "Update Font"}
+      </div>
       <div className="sidebar2-body font-sidebar-body">
         {font_styles.map((item, index) => (
           <div
-            className="font-sidebar-item"
             key={index}
             onClick={() => {
               handleClick(item);
             }}
+            className="font-sidebar-item"
           >
             <i className="fa-solid fa-chevron-right"></i>
             <div

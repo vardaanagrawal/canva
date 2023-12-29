@@ -1,40 +1,74 @@
 .auth {
   height: 100vh;
   width: 100vw;
+}
+.auth-inner {
+  height: 100vh;
+  width: 100vw;
   display: grid;
   place-items: center;
+  background: radial-gradient(rgba(0, 0, 0, 0.1), black);
+  backdrop-filter: blur(2px);
+  position: relative;
 }
-
+.auth-logo {
+  position: absolute;
+  top: 30px;
+  left: 5vw;
+}
 .auth-box {
-  border: solid silver 1px;
-  border-radius: 5px;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.781) 0px 7px 29px 0px;
+  border-radius: 10px;
   padding: 20px;
 }
 .auth-title {
   text-align: center;
-  font-size: x-large;
-  font-weight: 600;
+  font-size: xx-large;
+  font-weight: 700;
   margin: 20px 0px 30px 0px;
 }
 .auth-box form {
   display: flex;
   flex-direction: column;
 }
-
 .auth-box label {
   font-size: small;
+  display: none;
 }
 .auth-box input {
   margin-bottom: 10px;
   font-size: large;
-  padding: 2px 5px;
+  padding: 5px 15px;
+  height: 40px;
   width: 300px;
+  background-color: transparent;
+  border: solid gray 2px;
+  border-radius: 25px;
+  margin-bottom: 25px;
+  font-size: large;
+  color: black;
 }
-.submit-btn {
-  margin-left: 5px;
+.auth-box input:focus {
+  outline: none;
+  border-color: black;
+}
+.auth-box input[type="submit"] {
   margin-top: 10px;
+  width: 100%;
+  border: solid orangered 1px;
+  border-radius: 25px;
+  color: white;
+  height: 50px;
+  background-color: orangered;
+  cursor: pointer;
 }
-
+.auth-box input[type="submit"]:hover {
+  background-color: rgb(204, 54, 0);
+}
+.auth-box input[type="submit"]:active {
+  background-color: orangered;
+}
 /* -------------------------------------------------------------------------------------- */
 .verification {
   height: 100vh;

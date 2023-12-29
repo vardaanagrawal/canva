@@ -6,8 +6,11 @@ const getUser = async (req, res) => {
       password: 0,
       email_verified: 0,
       __v: 0,
-    }).populate("projects", "name");
-    res.send({ success: true, user: user });
+    })
+      .populate("projects", "name")
+      .populate("uploads");
+    if (user) res.send({ success: true, user: user });
+    else res.end({ success: false, message: "User not found" });
   } catch (err) {
     res.send({ success: false, message: "User not found" });
   }

@@ -23,13 +23,15 @@ const TextSchema = mongoose.Schema({
   font_family: { type: String, required: true },
   font_name: { type: String, required: true },
   font_size: { type: Number, default: 22 },
-  color: { type: String, default: "Black" },
+  font_color: { type: String, default: "Black" },
   text: { type: String },
   text_bold: { type: Boolean },
   text_italic: { type: Boolean },
   text_underline: { type: Boolean },
   x: { type: Number, default: 0 },
   y: { type: Number, default: 0 },
+  height: { type: Number, default: 400 },
+  width: { type: Number, default: 400 },
 });
 const PhotosSchema = mongoose.Schema({
   image_url: { type: String, required: true },

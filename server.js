@@ -16,8 +16,12 @@ app.use(bodyParser.json());
 const connectDB = require("./backend/config/db");
 connectDB();
 
-const Routes = require("./backend/routes/Routes");
-app.use("/", Routes);
+const AuthRoutes = require("./backend/routes/AuthRoutes");
+const UserRoutes = require("./backend/routes/UserRoutes");
+const ProjectRoutes = require("./backend/routes/ProjectRoutes");
+app.use("/api/auth", AuthRoutes);
+app.use("/api/user", UserRoutes);
+app.use("/api/project", ProjectRoutes);
 
 if (process.env.NODE_ENV == "production") {
   const path = require("path");

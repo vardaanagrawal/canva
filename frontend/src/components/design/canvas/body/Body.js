@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./body.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setSelectedComponent,
-  updateSelectedComponent,
-} from "../../../../redux/actions/selectedComponentActions";
+import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
 
 import { Rnd } from "react-rnd";
+import { manageElement } from "../../../../redux/actions/currentProjectActions";
 
 export default function Body({ zoom }) {
   const dispatch = useDispatch();
@@ -15,12 +13,23 @@ export default function Body({ zoom }) {
   const selected_component = useSelector((state) => state.selected_component);
   const [text, setText] = useState(selected_component.text);
   useEffect(() => {
-    if (selected_component.component_type === 3)
+    if (selected_component.component_type === 3) {
+      const index = components.findIndex(
+        (obj) => obj._id === selected_component._id
+      );
       dispatch(
-        updateSelectedComponent(selected_component._id, {
-          text: text,
+        manageElement({
+          action: "update",
+          element: "component",
+          method: "change",
+          prev_state: components[index],
+          new_state: {
+            _id: components[index]._id,
+            text: text,
+          },
         })
       );
+    }
   }, [text]);
   useEffect(() => {
     setText(selected_component.text);
@@ -28,12 +37,20 @@ export default function Body({ zoom }) {
 
   function onDragStop(e, d, item) {
     const { x, y } = d;
-    dispatch(
-      updateSelectedComponent(item._id, {
-        x: Math.floor(x),
-        y: Math.floor(y),
-      })
-    );
+    if (item.x !== x || item.y !== y)
+      dispatch(
+        manageElement({
+          action: "update",
+          element: "component",
+          method: "change",
+          prev_state: item,
+          new_state: {
+            _id: item._id,
+            x: Math.floor(x),
+            y: Math.floor(y),
+          },
+        })
+      );
   }
   return (
     <div
@@ -93,7 +110,6 @@ export default function Body({ zoom }) {
                       width: `${item.width}px`,
                       background: item.shape_bg_color,
                       clipPath: item.shape_clip_path,
-                      // zIndex: 0
                     }}
                     onClick={(e) => {
                       if (e.target.classList.contains("shape-component"))
@@ -120,7 +136,7 @@ export default function Body({ zoom }) {
                     selected_component._id == item._id && "selected_component"
                   }`}
                 >
-                  <input
+                  <textarea
                     className="textbox-component-input"
                     style={{
                       fontSize: `${item.font_size}px`,
@@ -131,6 +147,7 @@ export default function Body({ zoom }) {
                       textDecoration: item.text_underline
                         ? "underline"
                         : "none",
+                      resize: "none",
                     }}
                     onClick={(e) => {
                       if (
@@ -142,17 +159,11 @@ export default function Body({ zoom }) {
                     }}
                     onChange={(e) => {
                       setText(e.target.value);
-                      // dispatch(
-                      //   updateSelectedComponent(item._id, {
-                      //     text: text,
-                      //   })
-                      // );
                     }}
                     value={
                       selected_component._id === item._id ? text : item.text
-                      // item.text
                     }
-                  ></input>
+                  ></textarea>
                 </div>
               </Rnd>
             ) : (

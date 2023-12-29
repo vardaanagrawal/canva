@@ -11,6 +11,7 @@
   padding: 0px;
   display: grid;
   place-items: center;
+  /* overflow: hidden; */
 }
 
 .canvas-page {
@@ -19,7 +20,6 @@
 
 .selected_component {
   outline: solid orangered 3px;
-  border-radius: 2px;
 }
 
 .textbox-component-input {
@@ -36,7 +36,6 @@
 .image-component:hover,
 .text-box-component:hover {
   outline: solid orangered 3px;
-  border-radius: 2px;
 }
 .shape-component{
   transform-origin: top left;

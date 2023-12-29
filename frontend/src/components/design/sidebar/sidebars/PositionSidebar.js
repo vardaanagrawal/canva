@@ -1,35 +1,81 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+import { manageElement } from "../../../../redux/actions/currentProjectActions";
 
 export default function PositionSidebar() {
   const selected_component = useSelector((state) => state.selected_component);
+  const components = useSelector((state) => state.current_project.components);
   const [height, setHeight] = useState(selected_component.height);
   const [width, setWidth] = useState(selected_component.width);
   const [x, setX] = useState(selected_component.x);
   const [y, setY] = useState(selected_component.y);
+  const [flag, setFlag] = useState(1);
   useEffect(() => {
-    setHeight(selected_component.height);
-    setWidth(selected_component.width);
-    setX(selected_component.x);
-    setY(selected_component.y);
+    setHeight(selected_component.height ? selected_component.height : 0);
+    setWidth(selected_component.width ? selected_component.width : 0);
+    setX(selected_component.x ? selected_component.x : 0);
+    setY(selected_component.y ? selected_component.x : 0);
+    setFlag(1);
   }, [selected_component]);
-
-  console.log(selected_component);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(
-      updateSelectedComponent(selected_component._id, {
-        height: height,
-        width: width,
-        x: x,
-        y: y,
-      })
-    );
+    if (
+      selected_component.component_type !== 0 &&
+      selected_component.component_type !== 1 &&
+      !flag
+    ) {
+      const index = components.findIndex(
+        (obj) => obj._id === selected_component._id
+      );
+      if (
+        components[index].height !== height ||
+        components[index].width !== width ||
+        components[index].x !== x ||
+        components[index].y !== y
+      ) {
+        console.log("first");
+        dispatch(
+          manageElement({
+            action: "update",
+            element: "component",
+            method: "change",
+            prev_state: components[index],
+            new_state: {
+              _id: components[index]._id,
+              height,
+              width,
+              x,
+              y,
+            },
+          })
+        );
+      }
+    }
   }, [height, width, x, y]);
 
   const canvas = useSelector((state) => state.current_project.canvas);
+
+  const [alignDisabled, setAlignDisabled] = useState(true);
+  const [hwDisabled, setHwDisabled] = useState(true);
+  const [xyDisabled, setXyDisabled] = useState(true);
+
+  useEffect(() => {
+    console.log(selected_component);
+    if (selected_component.component_type === 0) {
+      setAlignDisabled(true);
+      setHwDisabled(true);
+      setXyDisabled(true);
+    } else if (selected_component.component_type === 1) {
+      setAlignDisabled(true);
+      setHwDisabled(true);
+      setXyDisabled(true);
+    } else {
+      setAlignDisabled(false);
+      setHwDisabled(false);
+      setXyDisabled(false);
+    }
+  }, [selected_component]);
 
   return (
     <div className="sidebar2-inner">
@@ -39,9 +85,14 @@ export default function PositionSidebar() {
           <div className="position-sidebar-mini-title">Align to page</div>
           <div className="position-sidebar-align">
             <div
-              className="position-sidebar-align-item"
+              className={`position-sidebar-align-item ${
+                alignDisabled && "position-align-item-disabled"
+              }`}
               onClick={() => {
-                setY(0);
+                if (!alignDisabled) {
+                  setY(0);
+                  setFlag(0);
+                }
               }}
             >
               <svg
@@ -58,9 +109,14 @@ export default function PositionSidebar() {
               Top
             </div>
             <div
-              className="position-sidebar-align-item"
+              className={`position-sidebar-align-item ${
+                alignDisabled && "position-align-item-disabled"
+              }`}
               onClick={() => {
-                setX(0);
+                if (!alignDisabled) {
+                  setX(0);
+                  setFlag(0);
+                }
               }}
             >
               <svg
@@ -77,9 +133,14 @@ export default function PositionSidebar() {
               Left
             </div>
             <div
-              className="position-sidebar-align-item"
+              className={`position-sidebar-align-item ${
+                alignDisabled && "position-align-item-disabled"
+              }`}
               onClick={() => {
-                setY(Math.floor(canvas.height / 2 - height / 2));
+                if (!alignDisabled) {
+                  setY(Math.floor(canvas.height / 2 - height / 2));
+                  setFlag(0);
+                }
               }}
             >
               <svg
@@ -96,9 +157,14 @@ export default function PositionSidebar() {
               Middle
             </div>
             <div
-              className="position-sidebar-align-item"
+              className={`position-sidebar-align-item ${
+                alignDisabled && "position-align-item-disabled"
+              }`}
               onClick={() => {
-                setX(Math.floor(canvas.width / 2 - width / 2));
+                if (!alignDisabled) {
+                  setX(Math.floor(canvas.width / 2 - width / 2));
+                  setFlag(0);
+                }
               }}
             >
               <svg
@@ -115,9 +181,14 @@ export default function PositionSidebar() {
               Center
             </div>
             <div
-              className="position-sidebar-align-item"
+              className={`position-sidebar-align-item ${
+                alignDisabled && "position-align-item-disabled"
+              }`}
               onClick={() => {
-                setY(Math.floor(canvas.height - height));
+                if (!alignDisabled) {
+                  setY(Math.floor(canvas.height - height));
+                  setFlag(0);
+                }
               }}
             >
               <svg
@@ -134,9 +205,14 @@ export default function PositionSidebar() {
               Bottom
             </div>
             <div
-              className="position-sidebar-align-item"
+              className={`position-sidebar-align-item ${
+                alignDisabled && "position-align-item-disabled"
+              }`}
               onClick={() => {
-                setX(Math.floor(canvas.width - width));
+                if (!alignDisabled) {
+                  setX(Math.floor(canvas.width - width));
+                  setFlag(0);
+                }
               }}
             >
               <svg
@@ -158,50 +234,96 @@ export default function PositionSidebar() {
           <div className="position-sidebar-mini-title">Advanced</div>
           <div className="position-sidebar-advanced">
             <div className="position-sidebar-advanced-item">
-              <div className="position-sidebar-advanced-label">Height</div>
+              <div
+                className={`position-sidebar-advanced-label ${
+                  hwDisabled && "position-advanced-disabled"
+                }`}
+              >
+                Height
+              </div>
               <input
-                className="position-sidebar-advanced-input"
-                type="number"
+                type="Number"
+                className={`position-sidebar-advanced-input ${
+                  hwDisabled && "position-advanced-input-diabled"
+                }`}
                 value={height}
                 onChange={(e) => {
-                  if (selected_component.component_type === 2) {
-                    setWidth(e.target.value);
+                  if (!hwDisabled) {
+                    if (selected_component.component_type === 2) {
+                      setWidth(e.target.value);
+                    }
+                    setHeight(e.target.value);
+                    setFlag(0);
                   }
-                  setHeight(e.target.value);
                 }}
               ></input>
             </div>
             <div className="position-sidebar-advanced-item">
-              <div className="position-sidebar-advanced-label">Width</div>
+              <div
+                className={`position-sidebar-advanced-label ${
+                  hwDisabled && "position-advanced-disabled"
+                }`}
+              >
+                Width
+              </div>
               <input
-                className="position-sidebar-advanced-input"
-                type="number"
+                type="Number"
+                className={`position-sidebar-advanced-input ${
+                  hwDisabled && "position-advanced-input-diabled"
+                }`}
                 value={width}
                 onChange={(e) => {
-                  if (selected_component.component_type === 2) {
-                    setHeight(e.target.value);
+                  if (!hwDisabled) {
+                    if (selected_component.component_type === 2) {
+                      setHeight(e.target.value);
+                    }
+                    setWidth(e.target.value);
+                    setFlag(0);
                   }
-                  setWidth(e.target.value);
                 }}
               ></input>
             </div>
             <div className="position-sidebar-advanced-item">
-              <div className="position-sidebar-advanced-label">X</div>
+              <div
+                className={`position-sidebar-advanced-label ${
+                  xyDisabled && "position-advanced-disabled"
+                }`}
+              >
+                X
+              </div>
               <input
-                className="position-sidebar-advanced-input"
+                type="Number"
+                className={`position-sidebar-advanced-input ${
+                  xyDisabled && "position-advanced-input-diabled"
+                }`}
                 value={x}
                 onChange={(e) => {
-                  setX(e.target.value);
+                  if (!xyDisabled) {
+                    setX(e.target.value);
+                    setFlag(0);
+                  }
                 }}
               ></input>
             </div>
             <div className="position-sidebar-advanced-item">
-              <div className="position-sidebar-advanced-label">Y</div>
+              <div
+                className={`position-sidebar-advanced-label ${
+                  xyDisabled && "position-advanced-disabled"
+                }`}
+              >
+                Y
+              </div>
               <input
-                className="position-sidebar-advanced-input"
+                type="Number"
+                className={`position-sidebar-advanced-input ${
+                  xyDisabled && "position-advanced-input-diabled"
+                }`}
                 value={y}
                 onChange={(e) => {
-                  setY(e.target.value);
+                  if (!xyDisabled) {
+                    setY(e.target.value);
+                    setFlag(0);
+                  }
                 }}
               ></input>
             </div>

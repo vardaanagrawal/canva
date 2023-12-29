@@ -65,3 +65,31 @@
 .dn-share-btn:active {
   background-color: silver;
 }
+
+.undo-redo-btns{
+  /* background-color: red; */
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.undo-btn,
+.redo-btn{
+  /* background-color: blue; */
+  color: white;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 3px;
+  /* transition: all 0.3s; */
+}
+.undo-btn:hover,
+.redo-btn:hover{
+  background-color: rgba(245, 245, 245, 0.2);
+}
+.undo-btn:active,
+.redo-btn:active{
+  background-color: rgba(245, 245, 245, 0.4);
+}

@@ -7,14 +7,25 @@ export function updateCurrentProject(data) {
   };
 }
 
-export function updateCanvasData(data) {
+// export function updateCanvasData(data) {
+//   return async function (dispatch) {
+//     dispatch({
+//       type: "UPDATE_CANVAS_DATA",
+//       payload: data,
+//     });
+//   };
+// }
+// ###########################################################################################
+export function manageElement(data) {
+  // console.log(data)
   return async function (dispatch) {
     dispatch({
-      type: "UPDATE_CANVAS_DATA",
+      type: `${data.action}_${data.element}`,
       payload: data,
     });
   };
 }
+// ###########################################################################################
 
 export function updateProjectName(data) {
   return async function (dispatch) {
@@ -25,20 +36,20 @@ export function updateProjectName(data) {
   };
 }
 
-export function addComponent(data) {
-  return async function (dispatch) {
-    dispatch({
-      type: "ADD_COMPONENT",
-      payload: data,
-    });
-  };
-}
+// export function addComponent(data) {
+//   return async function (dispatch) {
+//     dispatch({
+//       type: "ADD_COMPONENT",
+//       payload: data,
+//     });
+//   };
+// }
 
-export function deleteComponent(data) {
-  return async function (dispatch) {
-    dispatch({
-      type: "DELETE_COMPONENT",
-      payload: data,
-    });
-  };
-}
+// export function deleteComponent(data) {
+//   return async function (dispatch) {
+//     dispatch({
+//       type: "DELETE_COMPONENT",
+//       payload: data,
+//     });
+//   };
+// }

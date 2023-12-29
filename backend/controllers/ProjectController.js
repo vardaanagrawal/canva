@@ -7,17 +7,19 @@ const {
   Model2,
   Model3,
 } = require("../models/ComponentSchema");
+const { Uploads } = require("../models/UploadsModel");
+const { ObjectId } = require("mongodb");
 
 // #############################################################################################
 // #############################################################################################
 const createProject = async (req, res) => {
-  const userId = req.body.id;
-  const height = req.body.height;
-  const width = req.body.width;
-  const bg_color = req.body.bg_color;
+  const userId = req.body.id; // id of the user who created the project
+  const { height, width, bg_color } = req.body; // details of the canvas of the project
 
+  // creating a new canvas in the canvas table
   const newCanvas = new Canvas({ height, width, bg_color });
   await newCanvas.save();
+  // creating a new project and also storing data of the canvas in it
   const newProject = new Project({
     user: userId,
     canvas: newCanvas._id,
@@ -47,15 +49,28 @@ const createProject = async (req, res) => {
 // #############################################################################################
 // #############################################################################################
 const getProject = async (req, res) => {
-  const projectId = req.params.id;
+  const projectId = req.params.project_id; // id of the project
+  const userId = req.params.user_id; // id of the user who requested the project details
   try {
+    // finding the project details based on both project id and user id combined
+    // because user can only access its own project and cannot see anyone else's project
     let project = await Project.findById(projectId, { __v: 0 })
-      .populate("canvas", ["-__v", "_id"])
-      .populate("components", ["-__v"]);
-    res.send({ success: true, project: project });
+      .populate("canvas", ["-__v", "_id"]) // to include the details of the associated canvas
+      .populate("components", ["-__v"]); // to include the details of the associated components
+
+    const a = new ObjectId(userId);
+    // if project is not found
+    if (!project)
+      res.send({ success: false, status: 404, message: "Project not found." });
+    // checking if the user has its access or not
+    else if (!project.user.equals(a)) {
+      res.send({ success: false, status: 401, message: "Not Authorized" });
+    }
+    // if a project is found and user has access
+    else res.send({ success: true, status: 200, project: project });
   } catch (err) {
     console.log(err);
-    res.send({ success: false });
+    res.send({ success: false, status: 404, message: "Project not found" });
   }
 };
 
@@ -120,4 +135,16 @@ const saveProject = async (req, res) => {
   res.send({ success: true, project: proj });
 };
 
-module.exports = { createProject, getProject, saveProject };
+const uploadImage = async (req, res) => {
+  const { id, img } = req.body;
+  const newImg = new Uploads(img);
+  await newImg.save();
+  await User.findByIdAndUpdate(id, {
+    $push: { uploads: newImg._id },
+  });
+  res.send({
+    success: true,
+  });
+};
+
+module.exports = { createProject, getProject, saveProject, uploadImage };
