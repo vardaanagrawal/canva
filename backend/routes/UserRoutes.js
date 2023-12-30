@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { getUser } = require("../controllers/UserController");
 
-router.get("/:id", getUser); //fetching user information
+router.get("/:token", getUser); //fetching user information
 
 module.exports = router;

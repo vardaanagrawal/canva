@@ -95,6 +95,7 @@
   border: solid silver 1px;
   border-radius: 5px;
   width: 300px;
+  z-index: 10000000;
 }
 .nav-profile-dropdown button {
   width: 100%;

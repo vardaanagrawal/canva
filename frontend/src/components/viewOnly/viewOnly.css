@@ -1,0 +1,71 @@
+.view-only {
+  height: 100vh;
+  width: 100vw;
+}
+.view-only-head {
+  height: 50px;
+  background-color: rgb(148, 44, 213);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 2vw;
+  color: whitesmoke;
+}
+.view-only-head-logo {
+  margin-right: 20px;
+}
+.view-only-head-left,
+.view-only-head-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.view-only-body {
+  height: calc(100vh - 50px);
+  background-color: whitesmoke;
+  display: grid;
+  place-items: center;
+}
+.view-only-head-btn {
+  /* background-color: red; */
+  padding: 0px 10px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.view-only-head-btn:hover {
+  background-color: rgba(192, 192, 192, 0.3);
+}
+.view-only-head-btn:active {
+  background-color: rgba(192, 192, 192, 0.5);
+}
+
+.view-only-project-name {
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+}
+.view-only-login-btn {
+  height: 35px;
+  padding: 0px 10px;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+.view-only-canvas {
+  position: relative;
+  overflow: hidden;
+}
+.view-only-component {
+  position: absolute;
+  resize: none;
+  background: none;
+}
+.view-only-component:hover{
+    outline: solid orangered 3px
+}

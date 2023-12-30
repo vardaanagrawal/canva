@@ -1,6 +1,8 @@
 const { User } = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 var nodemailer = require("nodemailer");
+const axios = require("axios");
 
 // //-----------------------------------------------------------------------------------------
 
@@ -33,13 +35,68 @@ const sendVerificationMail = async (name, email) => {
 };
 
 const signup = async (req, res) => {
-  const user = req.body;
-  console.log(user);
-  try {
+  if (req.body.byGoogle) {
+    // google signup
+    const { googleAccessToken } = req.body;
+    axios
+      .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: {
+          Authorization: `Bearer ${googleAccessToken}`,
+        },
+      })
+      .then(async (response) => {
+        const user = response.data;
+        // checking if user already registered
+        const userExist = await User.findOne({ email: user.email });
+        if (userExist) {
+          res.send({ success: false, message: "User already registered" });
+          return;
+        }
+        // if user does not exist
+        const newUser = new User({
+          name: user.name,
+          email: user.email,
+          is_google: true,
+          email_verified: true,
+        });
+        await newUser.save();
+        // creating a jwt token for future login
+        const token = jwt.sign(
+          {
+            email: newUser.email,
+            id: newUser._id,
+          },
+          process.env.JWT_SECRET,
+          { expiresIn: "720h" }
+        );
+        // sending response to frontend
+        res.send({
+          success: true,
+          token,
+        });
+      })
+      .catch(() => {
+        res.send({
+          success: false,
+          message: "An error occured. Please try again.",
+        });
+      });
+  } else {
+    // normal signup
+    const user = req.body;
+    // checking if user already registered
+    const userExist = await User.findOne({ email: user.email });
+    if (userExist) {
+      res.send({ success: false, message: "User already registered" });
+      return;
+    }
+
+    // encrypting password
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(user.password, salt);
+
+    // sending verification mail
     const response = await sendVerificationMail(user.name, user.email);
-    console.log(response);
     if (response.status == 400) {
       throw "mail not sent";
     }
@@ -47,40 +104,96 @@ const signup = async (req, res) => {
       name: user.name,
       email: user.email,
       password: password,
+      is_google: false,
     });
     await newUser.save();
     res.send({
       success: true,
-      message: "User Registered Successfully",
-      userId: user._id,
-    });
-  } catch (e) {
-    console.log(e);
-    res.send({
-      success: false,
-      message: "Email already registered",
+      message: "Email sent for verification",
     });
   }
 };
 
 // //-----------------------------------------------------------------------------------------
 const login = async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const userExist = await User.findOne({ email: email });
-  if (!userExist) {
-    res.send({ success: false, message: "Invalid Credential" });
+  if (req.body.byGoogle) {
+    // google login
+    const { googleAccessToken } = req.body;
+
+    axios
+      .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: {
+          Authorization: `Bearer ${googleAccessToken}`,
+        },
+      })
+      .then(async (response) => {
+        const user = await User.findOne({ email: response.data.email });
+        if (!user) {
+          res.send({ success: false, message: "User not registered" });
+          return;
+        }
+        if (!user.is_google && !user.email_verified) {
+          res.send({ success: false, message: "Email not verified." });
+          return;
+        }
+        const token = jwt.sign(
+          {
+            email: user.email,
+            id: user._id,
+          },
+          process.env.JWT_SECRET,
+          { expiresIn: "720h" }
+        );
+        // sending response to frontend
+        res.send({
+          success: true,
+          token,
+        });
+      })
+      .catch(() => {
+        res.send({
+          success: false,
+          message: "An error occured. Please try again.",
+        });
+      });
   } else {
-    if (userExist.email_verified == false)
+    // normal login
+    const user = req.body;
+    const userExist = await User.findOne({ email: user.email });
+    if (!userExist) {
+      res.send({ success: false, message: "User not registered" });
+      return;
+    }
+    if (userExist && userExist.email_verified === false) {
       res.send({ success: false, message: "Email not verified" });
-    const passwordMatch = await bcrypt.compare(password, userExist.password);
+      return;
+    }
+    if (!userExist.password && userExist.is_google) {
+      res.send({
+        success: false,
+        message: "Login failed, try to login with google",
+      });
+      return;
+    }
+    const passwordMatch = await bcrypt.compare(
+      user.password,
+      userExist.password
+    );
     if (!passwordMatch) {
       res.send({ success: false, message: "Invalid Credential" });
     } else {
+      // creating a jwt token for future login
+      const token = jwt.sign(
+        {
+          email: userExist.email,
+          id: userExist._id,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "720h" }
+      );
       res.send({
         success: true,
-        message: "Login Successfull",
-        userId: userExist._id,
+        token,
       });
     }
   }
@@ -90,13 +203,11 @@ const login = async (req, res) => {
 
 const verifyEmail = async (req, res) => {
   const email = req.body.email;
-  console.log(req.body);
   try {
     const user = await User.findOneAndUpdate(
       { email: email },
       { email_verified: true }
     );
-    console.log(user);
     res.send({
       success: true,
       message: "Email verified",

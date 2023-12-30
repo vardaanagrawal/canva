@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./navbar.css";
 import logo from "../../images/logo.svg";
 import { useSelector } from "react-redux";
@@ -6,6 +6,27 @@ import { useSelector } from "react-redux";
 export default function Navbar({ openSidebar, setOpenSidebar }) {
   const user = useSelector((state) => state.user);
   const [openProfileDropdown, setOpenProfileDropdown] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        // Clicked outside the container, so close it
+        setOpenProfileDropdown(false);
+      }
+    };
+
+    // Attach the event listener to the whole document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="navbar">
@@ -36,7 +57,7 @@ export default function Navbar({ openSidebar, setOpenSidebar }) {
           </div>
 
           {openProfileDropdown && (
-            <div className="nav-profile-dropdown">
+            <div className="nav-profile-dropdown" ref={containerRef}>
               <div className="nav-profile-loggedin">
                 <div className="profile-dropdown-top">
                   <div className="profile-dropdown-img"></div>

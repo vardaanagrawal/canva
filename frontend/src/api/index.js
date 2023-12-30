@@ -3,25 +3,26 @@ import axios from "axios";
 // const base_url = `http://localhost:5000`;
 const base_url = ``;
 
+// const API = axios.create({ baseURL: "http://localhost:5000/api" });
+
+
 //-----auth api------------------------------------------------------------------------
-export async function signup(data) {
+export async function signUp(data) {
   const res = await axios.post(`${base_url}/api/auth/signup`, data);
-  return res.data;
+  return res;
 }
-
-export async function login(data) {
+export async function signIn(data) {
   const res = await axios.post(`${base_url}/api/auth/login`, data);
-  return res.data;
+  return res;
 }
-
 export async function verifyEmail(data) {
   const res = await axios.post(`${base_url}/api/auth/verifyEmail`, data);
   return res.data;
 }
 
 // ------user api-------------------------------------------------------------
-export async function getUser(id) {
-  const res = await axios.get(`${base_url}/api/user/${id}`);
+export async function getUser(token) {
+  const res = await axios.get(`${base_url}/api/user/${token}`);
   return res.data;
 }
 
@@ -40,6 +41,10 @@ export async function saveProject(data) {
   const res = await axios.put(`${base_url}/api/project/save`, data);
   return res.data;
 }
+export async function getProject(project_id) {
+  const res = await axios.get(`${base_url}/api/project/${project_id}`);
+  return res.data;
+}
 
 // ----- upload images --------------------------------------------------------
 
@@ -52,6 +57,9 @@ export async function uploadImg(imgData) {
 }
 
 export async function updateImageInDb(id, img) {
-  const res = await axios.post(`${base_url}/api/project/upload/image`, { id, img });
+  const res = await axios.post(`${base_url}/api/project/upload/image`, {
+    id,
+    img,
+  });
   return res.data;
 }

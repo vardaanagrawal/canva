@@ -1,65 +1,89 @@
 import React, { useState } from "react";
 import "./auth.css";
-import { login } from "../../api";
-import login_bg from "../../images/login_bg.avif";
+// import login_bg from "../../images/login_bg.avif";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import { signin, signinGoogle } from "../../redux/actions/authActions.js";
+
+const initial_state = {
+  email: "",
+  password: "",
+};
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  async function handleLogin() {
-    const res = await login({ email, password });
-    if (res.success) {
-      window.localStorage.setItem("Canva_User", res.userId);
-      window.location.href = "/";
-    } else {
-      window.alert(res.message);
+  const [form, setForm] = useState(initial_state);
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const [loading, setLoading] = useState(0);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(1);
+    if (form.name != "" && form.email != "" && form.password != "") {
+      dispatch(signin(form, navigate, setLoading));
     }
-    console.log(res);
+  };
+
+  const googleSignup = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
+  function handleGoogleLoginSuccess(tokenResponse) {
+    setLoading(2);
+    const accessToken = tokenResponse.access_token;
+    dispatch(signinGoogle(accessToken, navigate, setLoading));
   }
 
   return (
-    <div
-      className="auth"
-      style={{
-        backgroundImage: `url(${login_bg})`,
-        backgroundSize: "100% auto",
-      }}
-    >
-      <div className="auth-inner">
-        <div className="auth-logo">
-          <img src="https://static.canva.com/web/images/856bac30504ecac8dbd38dbee61de1f1.svg"></img>
-        </div>
-        <div className="auth-box">
-          <div className="auth-title">Login</div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleLogin();
+    <div className="auth-page">
+      <div className="auth-box">
+        <h1>Welcome back</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          ></input>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          ></input>
+          <input type="submit" value="Login"></input>
+        </form>
+        <div className="auth-actions">
+          <div
+            className="registered-btn"
+            onClick={() => {
+              navigate("/signup");
             }}
           >
-            <label>Email</label>
-            <input
-              placeholder="Email"
-              type="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              required
-            ></input>
-            <label>Password</label>
-            <input
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              required
-            ></input>
-            <input type="submit" value="Login" className="submit-btn"></input>
-          </form>
+            Not Registered? Signup.
+          </div>
+          <div
+            className="forgot-password-btn"
+            onClick={() => {
+              navigate("/forgotpassword");
+            }}
+          >
+            Forgot Password
+          </div>
+        </div>
+        <div className="auth-box-divider">
+          <div>OR</div>
+        </div>
+        <div className="google-signup-btn" onClick={googleSignup}>
+          <i className="fa-brands fa-google"></i> Sign in with google
         </div>
       </div>
     </div>

@@ -1,10 +1,14 @@
 const { User } = require("../models/UserModel");
+const jwt = require("jsonwebtoken")
 
 const getUser = async (req, res) => {
+  const token = req.params.token;
+  const { id, email } = jwt.verify(token, process.env.JWT_SECRET);
   try {
-    const user = await User.findById(req.params.id, {
+    const user = await User.findById(id, {
       password: 0,
       email_verified: 0,
+      is_google: 0,
       __v: 0,
     })
       .populate("projects", "name")

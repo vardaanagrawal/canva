@@ -29,30 +29,6 @@ const canvasList = [
     width: 300,
     bg_color: "#ffffff",
   },
-  {
-    name: "Document (Landscape)",
-    height: 400,
-    width: 800,
-    bg_color: "#ffffff",
-  },
-  {
-    name: "Document (Portrait)",
-    height: 500,
-    width: 350,
-    bg_color: "#ffffff",
-  },
-  {
-    name: "Instagram Post",
-    height: 400,
-    width: 400,
-    bg_color: "#ffffff",
-  },
-  {
-    name: "Phone Wallpaper",
-    height: 500,
-    width: 300,
-    bg_color: "#ffffff",
-  },
 ];
 
 export default function Home() {
@@ -70,8 +46,9 @@ export default function Home() {
     });
     if (res.success) {
       setLoading(false);
-      window.location.href = `/design/${res.project_details._id}`;
+      window.location.href = `/design/${res.project_details._id}/edit`;
     } else {
+      setLoading(false);
       alert(res.message);
     }
   }
@@ -88,7 +65,17 @@ export default function Home() {
             }}
             key={index}
           >
-            <div className="home-new-img"></div>
+            <div className="home-new-img">
+              <div
+                style={{
+                  height: "100px",
+                  width: `${(100 * item.width) / item.height}px`,
+                  background: "white",
+                  boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                  borderRadius: "5px",
+                }}
+              ></div>
+            </div>
             <div className="home-new-text">{item.name}</div>
           </div>
         ))}
@@ -97,12 +84,16 @@ export default function Home() {
       <div className="projects-list">
         {projects.map((item) => (
           <Link
-            to={`/design/${item._id}`}
+            to={`/design/${item._id}/edit`}
+            target="_blank"
             className="home-new-item"
             key={item._id}
           >
             <div className="home-new-img"></div>
             <div className="home-new-text">{item.name}</div>
+            {/* <div className="project-options">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div> */}
           </Link>
         ))}
         {projects.length === 0 && (

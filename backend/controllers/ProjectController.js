@@ -135,6 +135,8 @@ const saveProject = async (req, res) => {
   res.send({ success: true, project: proj });
 };
 
+// #############################################################################################
+// #############################################################################################
 const uploadImage = async (req, res) => {
   const { id, img } = req.body;
   const newImg = new Uploads(img);
@@ -147,4 +149,29 @@ const uploadImage = async (req, res) => {
   });
 };
 
-module.exports = { createProject, getProject, saveProject, uploadImage };
+// #############################################################################################
+// #############################################################################################
+
+const getProjectById = async (req, res) => {
+  try {
+    const project_id = req.params.project_id;
+    const project = await Project.findById(project_id)
+      .populate("canvas", "-__v")
+      .populate("components")
+      .populate("user", ["name", "email"]);
+    res.send({ success: true, project: project });
+  } catch (err) {
+    res.send({ success: false, message: "Project not found" });
+  }
+};
+
+// #############################################################################################
+// #############################################################################################
+
+module.exports = {
+  createProject,
+  getProject,
+  saveProject,
+  uploadImage,
+  getProjectById,
+};
