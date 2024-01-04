@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { verifyEmail } from "../../api";
+import { verifyEmail } from "../../api/authAPI";
 
 export default function Verification() {
   useEffect(() => {

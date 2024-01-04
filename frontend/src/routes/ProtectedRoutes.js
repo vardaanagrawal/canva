@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+
 import Dashboard from "../components/dashboard/Dashboard";
-import Home from "../components/home/Home";
+import Home from "../components/dashboard/outlets/home/Home";
+import Projects from "../components/dashboard/outlets/projects/Projects";
 import Design from "../components/design/Design";
 
 import { useDispatch } from "react-redux";
@@ -43,6 +45,7 @@ export default function ProtectedRoutes() {
     <Routes>
       <Route exact path="/" element={<Dashboard />}>
         <Route exact path="" element={<Home />}></Route>
+        <Route exact path="/projects" element={<Projects />}></Route>
       </Route>
       <Route path="/design/:id/edit" element={<Design />}></Route>
     </Routes>

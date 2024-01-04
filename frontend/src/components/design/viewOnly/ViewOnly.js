@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./viewOnly.css";
-import { getProject } from "../../api";
+import { getProject } from "../../../api";
 import { useParams } from "react-router-dom";
 
 export default function ViewOnly() {

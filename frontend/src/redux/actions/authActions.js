@@ -1,4 +1,4 @@
-import * as api from "../../api";
+import * as api from "../../api/authAPI";
 
 export const signup = (formData, navigate, setLoading) => async () => {
   try {

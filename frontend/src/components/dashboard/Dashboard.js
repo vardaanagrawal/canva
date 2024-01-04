@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import "./dashboard.css";
 
 import { Outlet } from "react-router-dom";
-import Navbar from "../navbar/Navbar";
-// import Sidebar from "../sidebar/Sidebar";
+import Navbar from "./navbar/Navbar";
+import Sidebar from "./sidebar/Sidebar";
 
 export default function Dashboard() {
-  const [openSidebar, setOpenSidebar] = useState(true);
   return (
     <div className="dashboard">
-      <Navbar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+      <Navbar />
       <div className="dashboard-bottom">
-        {/* {openSidebar && <Sidebar />} */}
-        <div
-          className="outlet"
-          // style={{ width: openSidebar ? "calc(100% - 320px)" : "100%" }}
-        >
+        <div className="sidebar-container">
+          <Sidebar />
+        </div>
+        <div className="outlet">
           <Outlet />
+        </div>
+        <div className="mobile-nav-container">
+          
         </div>
       </div>
     </div>

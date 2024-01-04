@@ -4,7 +4,7 @@
   display: grid;
   place-items: center;
   position: relative;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 .auth-box {
   background-color: white;
@@ -39,12 +39,6 @@
   color: white;
   cursor: pointer;
 }
-/* .auth-box form input[type="submit"]:hover {
-  background-color: #213555;
-}
-.auth-box form input[type="submit"]:active {
-  background-color: #213555;
-} */
 .auth-actions {
   display: flex;
   align-items: center;
@@ -62,7 +56,7 @@
   font-size: small;
   margin-top: 5px;
   cursor: pointer;
-  color: #4F709C
+  color: #4f709c;
 }
 .auth-box-divider {
   border: solid silver 1px;
@@ -93,41 +87,19 @@
   cursor: pointer;
   transition: all 0.3s;
 }
-.google-signup-btn:hover{
+.google-signup-btn:hover {
   background-color: #213555;
   color: white;
 }
-.loading-signup-btn{
+
+.auth-load-btn {
   height: 40px;
-  width: 100%;
+  padding: 0px 10px;
   border-radius: 5px;
+  border: solid black 1px;
+  background-color: #213555;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #213555;
-}
-
-.loader{
-  height: 25px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  animation: loader 1s linear 0s infinite normal forwards;
-}
-
-@keyframes loader {
-  0%{
-    transform: rotate(0deg);
-  }
-  25%{
-    transform: rotate(90deg);
-  }
-  50%{
-    transform: rotate(180deg);
-  }
-  75%{
-    transform: rotate(270deg);
-  }
-  100%{
-    transform: rotate(360deg);
-  }
 }

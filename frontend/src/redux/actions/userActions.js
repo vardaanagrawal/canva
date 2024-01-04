@@ -15,3 +15,21 @@ export function updateUploads(data) {
     });
   };
 }
+
+export function updateFolderData(data) {
+  return async function (dispatch) {
+    dispatch({
+      type: "UPDATE_FOLDER",
+      payload: data,
+    });
+  };
+}
+
+export function updateFolders(data) {
+  return async function (dispatch) {
+    dispatch({
+      type: "UPDATE_FOLDERS",
+      payload: data,
+    });
+  };
+}

@@ -13,11 +13,10 @@ const { ObjectId } = require("mongodb");
 // #############################################################################################
 // #############################################################################################
 const createProject = async (req, res) => {
-  const userId = req.body.id; // id of the user who created the project
-  const { height, width, bg_color } = req.body; // details of the canvas of the project
+  const userId = req.user.id; // id of the user who created the project
 
   // creating a new canvas in the canvas table
-  const newCanvas = new Canvas({ height, width, bg_color });
+  const newCanvas = new Canvas(req.body);
   await newCanvas.save();
   // creating a new project and also storing data of the canvas in it
   const newProject = new Project({
@@ -33,7 +32,7 @@ const createProject = async (req, res) => {
       { new: true }
     )
       .then((updatedUser) => {
-        console.log(updatedUser);
+        // console.log(updatedUser);
       })
       .catch((error) => {
         console.error(error);
@@ -48,41 +47,12 @@ const createProject = async (req, res) => {
 
 // #############################################################################################
 // #############################################################################################
-const getProject = async (req, res) => {
-  const projectId = req.params.project_id; // id of the project
-  const userId = req.params.user_id; // id of the user who requested the project details
-  try {
-    // finding the project details based on both project id and user id combined
-    // because user can only access its own project and cannot see anyone else's project
-    let project = await Project.findById(projectId, { __v: 0 })
-      .populate("canvas", ["-__v", "_id"]) // to include the details of the associated canvas
-      .populate("components", ["-__v"]); // to include the details of the associated components
-
-    const a = new ObjectId(userId);
-    // if project is not found
-    if (!project)
-      res.send({ success: false, status: 404, message: "Project not found." });
-    // checking if the user has its access or not
-    else if (!project.user.equals(a)) {
-      res.send({ success: false, status: 401, message: "Not Authorized" });
-    }
-    // if a project is found and user has access
-    else res.send({ success: true, status: 200, project: project });
-  } catch (err) {
-    console.log(err);
-    res.send({ success: false, status: 404, message: "Project not found" });
-  }
-};
-
-// #############################################################################################
-// #############################################################################################
-const saveProject = async (req, res) => {
+const updateProject = async (req, res) => {
   const project = req.body;
 
   // filtering older components and new components
   const newComponentsList = project.components.filter((x) => x.isNew === true);
   const oldComponents = project.components.filter((x) => x.isNew !== true);
-  console.log(oldComponents);
 
   function removeField(array, fieldToRemove) {
     return array.map((obj) => {
@@ -131,8 +101,90 @@ const saveProject = async (req, res) => {
     .populate("canvas", ["-__v"])
     .populate("components", ["-__v"]);
 
-  // res.send({ success: true, project: proj });
   res.send({ success: true, project: proj });
+};
+
+// #############################################################################################
+// #############################################################################################
+
+const deleteProject = async (req, res) => {
+  const userId = req.user.id;
+  const projectId = req.params.projectId;
+  try {
+    const project = await Project.findById({ _id: projectId });
+    if (project.user == userId) {
+      await project.deleteOne();
+      res.send({
+        success: true,
+        message: "project deleted successfully",
+      });
+    } else {
+      res.send({
+        success: false,
+        message: "not authorized to delete this project",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.send({
+      success: false,
+      message: "error occured while deleting project",
+    });
+  }
+};
+
+// #############################################################################################
+// #############################################################################################
+
+const moveProject = async (req, res) => {
+  const user = req.user;
+  const { projectId, folderId } = req.body;
+
+  try {
+    await Project.findOneAndUpdate(
+      { _id: projectId, user: user.id },
+      {
+        $set: { folder: folderId },
+      }
+    );
+    res.send({ success: true });
+  } catch (err) {
+    res.send({
+      success: false,
+      message: "Some error occured",
+    });
+  }
+};
+
+// #############################################################################################
+// #############################################################################################
+
+const getProject = async (req, res) => {
+  const projectId = req.params.project_id; // id of the project
+  const userId = req.params.user_id; // id of the user who requested the project details
+  try {
+    // finding the project details based on both project id and user id combined
+    // because user can only access its own project and cannot see anyone else's project
+    let project = await Project.findById(projectId, { __v: 0 })
+      .populate("canvas", ["-__v", "_id"]) // to include the details of the associated canvas
+      .populate("components", ["-__v"]); // to include the details of the associated components
+
+    const a = new ObjectId(userId);
+    // if project is not found
+    if (!project)
+      res.send({ success: false, status: 404, message: "Project not found." });
+    // checking if the user has its access or not
+    else if (!project.user.equals(a)) {
+      res.send({ success: false, status: 401, message: "Not Authorized" });
+    }
+    // if a project is found and user has access
+    else {
+      res.send({ success: true, status: 200, project: project });
+    }
+  } catch (err) {
+    console.log(err);
+    res.send({ success: false, status: 404, message: "Project not found" });
+  }
 };
 
 // #############################################################################################
@@ -171,7 +223,9 @@ const getProjectById = async (req, res) => {
 module.exports = {
   createProject,
   getProject,
-  saveProject,
+  updateProject,
   uploadImage,
   getProjectById,
+  deleteProject,
+  moveProject,
 };

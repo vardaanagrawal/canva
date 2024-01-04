@@ -1,0 +1,36 @@
+.folder-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 80px;
+  padding: 0px 15px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+.folder-card:hover {
+  background-color: rgb(231, 231, 231);
+}
+.folder-option-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 3px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.folder-card:hover .folder-option-btn {
+  display: flex;
+}
+.folder-card-img img {
+  height: 40px;
+}
+.folder-card-name {
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -20,17 +20,17 @@ export default function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (mode === 1) {
-      if (form.email != "") {
+      if (form.email !== "") {
         // send otp
       }
       setMode(2);
     } else if (mode === 2) {
-      if (form.otp != "") {
+      if (form.otp !== "") {
         // verify otp
       }
       setMode(3);
     } else if (mode === 3) {
-      if (form.password != "") {
+      if (form.password !== "") {
         // reset password
       }
     }

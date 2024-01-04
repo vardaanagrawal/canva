@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./auth.css";
-// import login_bg from "../../images/login_bg.avif";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { signin, signinGoogle } from "../../redux/actions/authActions.js";
+import SpinLoader from "../utils/spinLoader/SpinLoader.js";
 
 const initial_state = {
   email: "",
@@ -28,13 +28,15 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(1);
-    if (form.name != "" && form.email != "" && form.password != "") {
+    if (form.name !== "" && form.email !== "" && form.password !== "") {
       dispatch(signin(form, navigate, setLoading));
     }
   };
 
-  const googleSignup = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
-  function handleGoogleLoginSuccess(tokenResponse) {
+  const googleSignup = useGoogleLogin({
+    onSuccess: handleGoogleLoginSuccess,
+  });
+  async function handleGoogleLoginSuccess(tokenResponse) {
     setLoading(2);
     const accessToken = tokenResponse.access_token;
     dispatch(signinGoogle(accessToken, navigate, setLoading));
@@ -59,7 +61,12 @@ export default function Login() {
             onChange={handleChange}
             required
           ></input>
-          <input type="submit" value="Login"></input>
+          {loading !== 1 && <input type="submit" value="Login"></input>}
+          {loading === 1 && (
+            <div className="auth-load-btn">
+              <SpinLoader height={25} width={25} color={"white"}/>
+            </div>
+          )}
         </form>
         <div className="auth-actions">
           <div
@@ -89,3 +96,21 @@ export default function Login() {
     </div>
   );
 }
+
+// code for connecting google drive
+/*
+const googleSignup = useGoogleLogin({
+  onSuccess: handleGoogleLoginSuccess,
+  flow: "auth-code",
+  scope: ["https://www.googleapis.com/auth/drive.metadata.readonly"],
+});
+async function handleGoogleLoginSuccess(codeResponse) {
+  console.log(codeResponse);
+  const res = await axios.get(`http://localhost:5000/api/auth/google`, {
+    headers: {
+      code: codeResponse.code,
+    },
+  });
+  console.log(res.data);
+}
+*/

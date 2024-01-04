@@ -119,7 +119,6 @@ const login = async (req, res) => {
   if (req.body.byGoogle) {
     // google login
     const { googleAccessToken } = req.body;
-
     axios
       .get("https://www.googleapis.com/oauth2/v3/userinfo", {
         headers: {

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./auth.css";
-import login_bg from "../../images/login_bg.avif";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { useGoogleLogin } from "@react-oauth/google";
 import { signup, signupGoogle } from "../../redux/actions/authActions";
+import SpinLoader from "../utils/spinLoader/SpinLoader";
 
 const initial_state = {
   name: "",
@@ -30,7 +29,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(1);
-    if (form.name != "" && form.email != "" && form.password != "") {
+    if (form.name !== "" && form.email !== "" && form.password !== "") {
       dispatch(signup(form, navigate, setLoading));
     }
   };
@@ -68,11 +67,10 @@ export default function Signup() {
             onChange={handleChange}
             required
           ></input>
-          {loading != 1 ? (
-            <input type="submit" value="Signup"></input>
-          ) : (
-            <div className="loading-signup-btn">
-              <Loader color="white" />
+          {loading !== 1 && <input type="submit" value="Signup"></input>}
+          {loading === 1 && (
+            <div className="auth-load-btn">
+              <SpinLoader height={25} width={25} color="white" />
             </div>
           )}
         </form>
@@ -102,17 +100,5 @@ export default function Signup() {
         </div>
       </div>
     </div>
-  );
-}
-
-function Loader({ color }) {
-  return (
-    <div
-      className="loader"
-      style={{
-        border: `solid ${color} 3px`,
-        borderBottom: `solid transparent 3px`,
-      }}
-    ></div>
   );
 }

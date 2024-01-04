@@ -19,9 +19,11 @@ connectDB();
 const AuthRoutes = require("./backend/routes/AuthRoutes");
 const UserRoutes = require("./backend/routes/UserRoutes");
 const ProjectRoutes = require("./backend/routes/ProjectRoutes");
+const FolderRoutes = require("./backend/routes/FolderRoutes");
 app.use("/api/auth", AuthRoutes);
 app.use("/api/user", UserRoutes);
 app.use("/api/project", ProjectRoutes);
+app.use("/api/folder", FolderRoutes);
 
 if (process.env.NODE_ENV == "production") {
   const path = require("path");

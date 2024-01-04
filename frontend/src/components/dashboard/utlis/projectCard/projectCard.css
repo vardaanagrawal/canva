@@ -1,0 +1,161 @@
+.project-card {
+  position: relative;
+}
+.project-card-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/2;
+  background-color: silver;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.project-card-name {
+  font-size: small;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+.project-card-name:hover {
+  color: #8b3dff;
+}
+.project-option-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 3px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1200px) {
+  .project-option-btn {
+    display: flex;
+  }
+}
+.project-option-btn:hover {
+  background-color: #8b3dff;
+  color: white;
+}
+.project-card:hover .project-option-btn {
+  display: flex;
+}
+.options-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000000000000000000000000000;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.333);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+@media only screen and (max-width: 400px) {
+  .options-page {
+    justify-content: flex-end;
+  }
+}
+.options-box-img {
+  height: 100px;
+  width: 100px;
+}
+.options-box {
+  padding: 20px 0px;
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  color: black;
+  z-index: 10;
+}
+.options-head {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0px;
+  font-weight: bold;
+  font-size: x-large;
+  border-bottom: solid silver 1px;
+  padding-bottom: 30px;
+}
+.options-body {
+  margin-top: 20px;
+}
+.options-box-item {
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.options-box-item i {
+  font-size: larger;
+  width: 25px;
+}
+.options-box-item:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.mtf-head {
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: x-large;
+}
+.mtf-head i{
+  cursor: pointer;
+}
+.mtf-body {
+  height: 200px;
+  border: solid silver 1px;
+  margin-top: 20px;
+  overflow: scroll;
+}
+.mtf-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.mtf-item:hover {
+  background-color: whitesmoke;
+}
+.mtf-item input {
+  position: absolute;
+  left: 15px;
+  height: 20px;
+  width: 20px;
+}
+.mtf-item label{
+  height: 100%;
+  padding: 0px 50px;
+  width: calc(100% - 100px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.mtf-foot {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
+  padding: 0px 15px;
+  margin-top: 20px;
+}
+.mtf-foot button {
+  height: 45px;
+  width: 150px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
