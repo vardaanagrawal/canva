@@ -18,19 +18,20 @@ export default function ProtectedRoutes() {
     const token = localStorage.getItem("Canva_User");
     if (token) {
       // fetching user details if user id present in local storage
-      fetchUserDetails();
+      fetchUserDetails(token);
     } else {
       // user id not found in local storage so setting loading and protected false so that it can redirect to login
       // navigate("/login");
+      console.log("token not found");
     }
   }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // fetching user details from database with user id found in local storage
-  async function fetchUserDetails() {
-    const res = await getUser();
-    console.log(res);
+  async function fetchUserDetails(token) {
+    const res = await getUser(token);
+    console.log("get user response: ", res);
     if (res.success) {
       // user found in database
       // updating user details in redux
@@ -39,6 +40,7 @@ export default function ProtectedRoutes() {
     } else {
       // user not found in database
       // navigate("/login");
+      console.log("get user response not success");
     }
   }
   return loading ? (

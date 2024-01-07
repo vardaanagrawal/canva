@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const base_url = process.env.REACT_APP_API_BASE_URL;
-const token = localStorage.getItem("Canva_User");
+// const token = localStorage.getItem("Canva_User");
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 // axios.defaults.headers.common["Content-Type"] = "application/json";
 
 // get user details
-export async function getUser() {
+export async function getUser(token) {
   try {
     const res = await axios.get(`${base_url}/api/user`, {
       headers: {
