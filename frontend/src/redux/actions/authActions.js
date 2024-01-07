@@ -41,6 +41,7 @@ export const signupGoogle = (accessToken, navigate, setLoading) => async () => {
 export const signin = (formData, navigate, setLoading) => async () => {
   try {
     const { data } = await api.signIn({ ...formData, byGoogle: false });
+    alert(data.success);
     if (data.success) {
       localStorage.setItem("Canva_User", data.token);
       setLoading(0);
