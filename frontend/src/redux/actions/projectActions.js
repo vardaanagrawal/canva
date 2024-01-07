@@ -1,4 +1,4 @@
-import * as api from "../../api";
+import * as api from "../../api/projectAPI";
 
 export function createNewProject(projectData, navigate, setLoading) {
   return async function (dispatch) {

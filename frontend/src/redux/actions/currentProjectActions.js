@@ -1,6 +1,7 @@
 import domtoimage from "dom-to-image-more";
 import axios from "axios";
 import * as api from "../../api";
+import * as projectApi from "../../api/projectAPI";
 
 export function updateCurrentProject(data) {
   return async function (dispatch) {
@@ -64,7 +65,7 @@ export function saveProject(project, setSaving) {
     // --------------------------------------------------------
     const thumbnail = await createThumbnail();
     console.log(thumbnail);
-    const res = await api.saveProject({
+    const res = await projectApi.saveProject({
       ...project,
       thumbnail,
     });

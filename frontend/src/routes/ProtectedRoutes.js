@@ -7,7 +7,7 @@ import Projects from "../components/dashboard/outlets/projects/Projects";
 import Design from "../components/design/Design";
 
 import { useDispatch } from "react-redux";
-import { getUser } from "../api";
+import { getUser } from "../api/userAPI";
 import { updateUserDetails } from "../redux/actions/userActions";
 import Folder from "../components/dashboard/outlets/folder/Folder";
 
@@ -18,18 +18,19 @@ export default function ProtectedRoutes() {
     const token = localStorage.getItem("Canva_User");
     if (token) {
       // fetching user details if user id present in local storage
-      fetchUserDetails(token);
+      fetchUserDetails();
     } else {
       // user id not found in local storage so setting loading and protected false so that it can redirect to login
-      navigate("/login");
+      // navigate("/login");
     }
   }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // fetching user details from database with user id found in local storage
-  async function fetchUserDetails(token) {
-    const res = await getUser(token);
+  async function fetchUserDetails() {
+    const res = await getUser();
+    console.log(res);
     if (res.success) {
       // user found in database
       // updating user details in redux
@@ -37,7 +38,7 @@ export default function ProtectedRoutes() {
       setLoading(false);
     } else {
       // user not found in database
-      navigate("/login");
+      // navigate("/login");
     }
   }
   return loading ? (

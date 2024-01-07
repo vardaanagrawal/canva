@@ -62,6 +62,7 @@ export const signinGoogle = (accessToken, navigate, setLoading) => async () => {
       googleAccessToken: accessToken,
       byGoogle: true,
     });
+    console.log(data);
     if (data.success) {
       localStorage.setItem("Canva_User", data.token);
       setLoading(0);

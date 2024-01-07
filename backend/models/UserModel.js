@@ -9,8 +9,8 @@ const userSchema = mongoose.Schema(
     password: { type: String },
     is_google: { type: Boolean },
     projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
-    uploads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Uploads" }],
     folders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Folders" }],
+    uploads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Uploads" }],
   },
   {
     timestamps: true,
