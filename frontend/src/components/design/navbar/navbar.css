@@ -12,22 +12,39 @@
   align-items: center;
   gap: 20px;
 }
+.dn-mobile-menu-btn {
+  display: none;
+  color: white;
+  height: 35px;
+  width: 35px;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.dn-mobile-menu-btn:hover {
+  background-color: #7d38e4;
+}
 .dn-title input {
   color: white;
   background-color: transparent;
   border: none;
   font-size: large;
-  min-width: 1px;
   height: 35px;
   padding: 0px 10px;
-  border-radius: 5px;
+  border-radius: 3px;
+  min-width: 20px;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .dn-title input::placeholder {
   color: whitesmoke;
 }
 .dn-title input:focus {
-  outline: none;
-  border: solid whitesmoke 1px;
+  outline: solid whitesmoke 2px;
 }
 .dn-save-btn {
   background-color: #8b3dff;
@@ -37,9 +54,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
   transition: all 0.3s ease;
+  gap: 10px;
 }
 .dn-save-btn:hover {
   background-color: #7d38e4;
@@ -55,9 +73,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
   transition: all 0.3s ease;
+  gap: 10px;
 }
 .dn-share-btn:hover {
   background-color: whitesmoke;
@@ -66,30 +85,58 @@
   background-color: silver;
 }
 
-.undo-redo-btns{
-  /* background-color: red; */
+.undo-redo-btns {
   display: flex;
   gap: 5px;
   align-items: center;
 }
 .undo-btn,
-.redo-btn{
-  /* background-color: blue; */
+.redo-btn {
   color: white;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border-radius: 3px;
-  /* transition: all 0.3s; */
 }
 .undo-btn:hover,
-.redo-btn:hover{
+.redo-btn:hover {
   background-color: rgba(245, 245, 245, 0.2);
 }
 .undo-btn:active,
-.redo-btn:active{
+.redo-btn:active {
   background-color: rgba(245, 245, 245, 0.4);
+}
+/* =============================================================== */
+
+@media only screen and (max-width: 600px) {
+  .dn-title {
+    display: none;
+  }
+  .dn-mobile-menu-btn{
+    display: flex;
+  }
+  .dn-right-menu {
+    gap: 5px;
+  }
+  .dn-share-btn,
+  .dn-save-btn {
+    background-color: transparent;
+    color: white;
+    font-size: larger;
+    width: 35px;
+    padding: 0px 0px;
+  }
+  .dn-share-btn:hover {
+    background-color: #7d38e4;
+  }
+  .dn-share-btn:active {
+    background-color: transparent;
+  }
+  .dn-share-btn-text,
+  .dn-save-btn-text {
+    display: none;
+  }
 }

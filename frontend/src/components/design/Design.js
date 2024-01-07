@@ -66,9 +66,7 @@ export default function Design() {
           <div className="sidebar-container">
             <Sidebar />
           </div>
-          <div className="canvas-container">
-            <Canvas />
-          </div>
+          <Canvas />
         </div>
       </div>
     );

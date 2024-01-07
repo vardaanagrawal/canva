@@ -64,7 +64,8 @@ function Sidebar2() {
           dispatch(showSidebar2({ visible: false }));
         }}
       >
-        {"<"}
+        <div className="sidebar2-close-btn-desktop">{"<"}</div>
+        <div className="sidebar2-close-btn-mobile">{"v"}</div>
       </div>
     </div>
   );

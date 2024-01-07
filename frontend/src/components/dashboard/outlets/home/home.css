@@ -1,5 +1,5 @@
 .home {
-  padding: 5vh 2vw;
+  padding: 3vh 2vw;
 }
 .home-item {
   width: 100%;
@@ -23,11 +23,7 @@
   height: 120px;
   width: 200px;
   border-radius: 5px;
-  background: linear-gradient(
-    to bottom right,
-    rgb(220, 220, 220),
-    rgb(110, 110, 110)
-  );
+  background-color: #f2f3f5;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -58,4 +54,74 @@
 }
 .no-project-box img {
   height: 300px;
+}
+
+.home-blue-box {
+  height: 200px;
+  width: 100%;
+  background: linear-gradient(
+      104.19deg,
+      rgba(37, 1, 83, 0) 39.91%,
+      #3b0388 77.15%
+    ),
+    linear-gradient(
+      96.54deg,
+      rgba(6, 189, 196, 0.78) 13.14%,
+      rgba(2, 214, 215, 0) 57.93%
+    ),
+    #440496;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px 0px 15px 0px;
+  border-radius: 5px;
+  overflow: scroll;
+}
+.blue-box-title {
+  font-size: xx-large;
+  font-weight: 600;
+  color: white;
+}
+.blue-box-row {
+  width: calc(100% - 40px);
+  overflow: scroll;
+  padding: 0px 20px;
+}
+.blue-box-items {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+}
+.blue-box-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  gap: 5px;
+  cursor: pointer;
+}
+.blue-box-btn-img {
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.blue-box-btn-text {
+  font-size: smaller;
+  color: white;
+}
+
+@media only screen and (max-width: 850px) {
+  .blue-box-title {
+    font-size: x-large;
+  }
+  .blue-box-btn-text {
+    font-size: x-small;
+  }
 }

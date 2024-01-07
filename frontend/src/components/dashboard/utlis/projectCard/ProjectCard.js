@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./projectCard.css";
 import { Link } from "react-router-dom";
 import { deleteProject } from "../../../../redux/actions/projectActions";
 import { useDispatch, useSelector } from "react-redux";
 import SpinLoader from "../../../utils/spinLoader/SpinLoader";
-import { moveProject } from "../../../../api";
+// import { moveProject } from "../../../../api";
+import { moveProject } from "../../../../redux/actions/projectActions";
 
 export default function ProjectCard({ project }) {
   const [openOptionsBox, setOpenOptionsBox] = useState(false);
+  const folders = useSelector((state) => state.folders);
 
   return (
     <div className="project-card">
-      <Link
-        to={`/design/${project._id}/edit`}
-        className="project-card-img"
-      ></Link>
+      <Link to={`/design/${project._id}/edit`} className="project-card-img">
+        <img
+          src={project.thumbnail}
+          alt=""
+          style={{
+            height: "100px",
+          }}
+        ></img>
+      </Link>
       <div
         className="project-option-btn"
         onClick={() => {
@@ -26,6 +33,11 @@ export default function ProjectCard({ project }) {
       <Link to={`/design/${project._id}/edit`} className="project-card-name">
         {project.name}
       </Link>
+      {project.folder && project.folder !== null && (
+        <div className="project-folder-tag">
+          {folders.filter((x) => x._id === project.folder)[0].name}
+        </div>
+      )}
       {openOptionsBox && (
         <ProjectOptionsModal
           setOpenOptionsBox={setOpenOptionsBox}
@@ -48,21 +60,19 @@ function ProjectOptionsModal({ setOpenOptionsBox, project }) {
 
   const [move, setMove] = useState(false);
 
-  const folders = useSelector((state) => state.user.folders);
+  const folders = useSelector((state) => state.folders);
 
   async function handleMoveToFolder() {
     setMoving(true);
     const selectedFolder = document.querySelector(".mtf-item input:checked");
     if (selectedFolder) {
-      const res = await moveProject(project._id, selectedFolder.value);
-      if (res.success) {
-        // dispatch krke redux me state update krna h yaha
-      } else {
-        alert(res.message);
-      }
-      setOpenOptionsBox(false);
+      const data = {
+        projectId: project._id,
+        from: project.folder,
+        to: selectedFolder.value,
+      };
+      dispatch(moveProject(data, setMoving));
     }
-    setMoving(false);
   }
 
   return (
@@ -78,13 +88,12 @@ function ProjectOptionsModal({ setOpenOptionsBox, project }) {
         className="options-box-img"
         style={{
           height: "150px",
-          width: "80%",
-          maxWidth: "300px",
+          width: "max-content",
           backgroundColor: "gray",
-          border: "solid black 1px",
-          borderRadius: "5px",
         }}
-      ></div>
+      >
+        <img src={project.thumbnail} alt="" style={{ height: "100%" }}></img>
+      </div>
       {!move && (
         <div className="options-box">
           <div className="options-head">
@@ -160,17 +169,20 @@ function ProjectOptionsModal({ setOpenOptionsBox, project }) {
           </div>
           <div className="mtf-body">
             {folders.length > 0 &&
-              folders.map((item, index) => (
-                <div className="mtf-item" key={item._id}>
-                  <input
-                    type="radio"
-                    id={item._id}
-                    name="mf-radio"
-                    value={item._id}
-                  ></input>
-                  <label htmlFor={item._id}>{item.name}</label>
-                </div>
-              ))}
+              folders.map(
+                (item, index) =>
+                  item._id !== project.folder && (
+                    <div className="mtf-item" key={item._id}>
+                      <input
+                        type="radio"
+                        id={item._id}
+                        name="mf-radio"
+                        value={item._id}
+                      ></input>
+                      <label htmlFor={item._id}>{item.name}</label>
+                    </div>
+                  )
+              )}
             {folders.length === 0 && (
               <div
                 style={{

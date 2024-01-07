@@ -8,10 +8,12 @@ const getUser = async (req, res) => {
       email_verified: 0,
       is_google: 0,
       __v: 0,
+      createdAt: 0,
+      updatedAt: 0,
     })
-      .populate("projects", ["name", "updatedAt", "folder"])
-      .populate("uploads")
-      .populate("folders", ["-owner", "-__v"]);
+      .populate("projects", ["name", "updatedAt", "folder", "thumbnail"])
+      .populate("folders", ["-owner", "-__v"])
+      .populate("uploads");
     if (user) res.send({ success: true, user: user });
     else res.end({ success: false, message: "User not found" });
   } catch (err) {

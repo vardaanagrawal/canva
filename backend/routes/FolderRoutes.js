@@ -5,10 +5,13 @@ const {
   createFolder,
   updateFolder,
   deleteFolder,
+  getFolder,
 } = require("../controllers/FolderController");
+const { authenticateUser } = require("../middleware/auth");
 
-router.post("/create", createFolder); //create new folder
-router.put("/update", updateFolder); //create new folder
-router.delete("/:folder_id", deleteFolder); //create new folder
+router.post("/", authenticateUser, createFolder); // create new folder
+router.get("/:folderId", authenticateUser, getFolder); // get folder
+router.put("/:folderId", authenticateUser, updateFolder); // update folder
+router.delete("/:folderId", authenticateUser, deleteFolder); // delete folder
 
 module.exports = router;

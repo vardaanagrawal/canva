@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  manageElement, // used for undo redo actions
-  updateCurrentProject, // used while saving the project
-  updateProjectName, // used while changing the name of the project
+  manageElement,
+  saveProject, // used while saving the project
 } from "../../../redux/actions/currentProjectActions";
-import { saveProject } from "../../../api";
 import { setSelectedComponent } from "../../../redux/actions/selectedComponentActions";
+
+import SpinLoader from "../../utils/spinLoader/SpinLoader";
 
 export default function Navbar() {
   const currentProject = useSelector((state) => state.current_project);
@@ -15,21 +15,25 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateProjectName(name));
+    dispatch(
+      manageElement({
+        action: "update",
+        element: "project_name",
+        name: name,
+      })
+    );
   }, [name]);
+
+  const [saving, setSaving] = useState(false);
 
   // function to save changes of project in database
   async function save() {
-    const res = await saveProject(currentProject);
-    // updating the project details in redux
-    dispatch(updateCurrentProject(res.project));
+    setSaving(true);
+    dispatch(saveProject(currentProject, setSaving));
   }
 
-  // const state = useSelector((state) => state.undo);
   const undo = useSelector((state) => state.undo);
-  // console.log("undo: ", undo);
   const redo = useSelector((state) => state.redo);
-  // console.log("redo: ", redo);
 
   function handleUndo() {
     let undo_item = undo.pop();
@@ -69,7 +73,6 @@ export default function Navbar() {
 
   function handleRedo() {
     let redo_item = redo.pop();
-    // let redo_item = {};
     if (redo_item.action === "add") {
       dispatch(
         manageElement({
@@ -102,20 +105,34 @@ export default function Navbar() {
       );
     }
   }
+  function checkName() {
+    if (name.trim() === "") {
+      setName("Untitled Project");
+    }
+  }
 
   return (
     <div className="design-navbar">
       {/* ######################################################################################## */}
       <div className="dn-left-menu">
+        <div className="dn-mobile-menu-btn">
+          <i className="fa-solid fa-bars"></i>
+        </div>
         <div className="dn-title">
           <input
-            placeholder="Untitled Design"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
             }}
+            onBlur={() => {
+              checkName();
+            }}
+            className="design-project-name"
           ></input>
         </div>
+      </div>
+      {/* ######################################################################################## */}
+      <div className="dn-right-menu">
         <div className="undo-redo-btns">
           <div
             className="undo-btn"
@@ -154,18 +171,23 @@ export default function Navbar() {
             </svg>
           </div>
         </div>
-      </div>
-      {/* ######################################################################################## */}
-      <div className="dn-right-menu">
         <div
           className="dn-save-btn"
           onClick={() => {
             save();
           }}
         >
-          Save
+          {saving ? (
+            <SpinLoader height={20} width={20} color="white" />
+          ) : (
+            <i className="fa-solid fa-cloud-arrow-up"></i>
+          )}
+          <div className="dn-save-btn-text">Save</div>
         </div>
-        <div className="dn-share-btn">Share</div>
+        <div className="dn-share-btn">
+          <i className="fa-solid fa-arrow-up-from-bracket"></i>
+          <div className="dn-share-btn-text">Share</div>
+        </div>
       </div>
       {/* ######################################################################################## */}
     </div>

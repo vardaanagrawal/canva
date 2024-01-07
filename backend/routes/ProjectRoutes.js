@@ -13,7 +13,7 @@ const {
 const { authenticateUser } = require("../middleware/auth");
 
 router.post("/", authenticateUser, createProject); // create new project
-router.put("/", authenticateUser, updateProject); // update changes in existing project
+router.put("/",  updateProject); // update changes in existing project
 router.delete("/:projectId", authenticateUser, deleteProject); // deletes project
 router.put("/move", authenticateUser, moveProject); // move project to different folder
 

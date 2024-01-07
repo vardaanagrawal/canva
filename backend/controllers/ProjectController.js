@@ -1,6 +1,7 @@
 const { Canvas } = require("../models/CanvasModel");
 const { Project } = require("../models/ProjectModel");
 const { User } = require("../models/UserModel");
+const { Folder } = require("../models/FoldersModel");
 const {
   Components,
   Model1,
@@ -42,6 +43,12 @@ const createProject = async (req, res) => {
     success: true,
     message: "New project created",
     project_details: newProject,
+    project: {
+      _id: newProject._id,
+      name: newProject.name,
+      updatedAt: newProject.updatedAt,
+      folder: newProject.folder,
+    },
   });
 };
 
@@ -92,10 +99,12 @@ const updateProject = async (req, res) => {
   // updating canvas
   await Canvas.findByIdAndUpdate(project.canvas._id, project.canvas);
 
+  console.log(project);
   // updating name and notes of project
   const proj = await Project.findByIdAndUpdate(project._id, {
     name: project.name,
     notes: project.notes,
+    thumbnail: project.thumbnail,
     $push: { components: { $each: newComponentsIds } },
   })
     .populate("canvas", ["-__v"])
@@ -138,17 +147,36 @@ const deleteProject = async (req, res) => {
 
 const moveProject = async (req, res) => {
   const user = req.user;
-  const { projectId, folderId } = req.body;
-
+  const projectId = req.body.projectId;
+  const oldFolderId = req.body.from;
+  const newFolderId = req.body.to;
   try {
-    await Project.findOneAndUpdate(
+    const project = await Project.findOneAndUpdate(
       { _id: projectId, user: user.id },
       {
-        $set: { folder: folderId },
-      }
+        $set: { folder: newFolderId },
+      },
+      { new: true }
     );
-    res.send({ success: true });
+    const newFolder = await Folder.findByIdAndUpdate(
+      newFolderId,
+      {
+        $push: { projects: projectId },
+      },
+      { new: true }
+    );
+    console.log(newFolder);
+    const oldFolder = await Folder.findByIdAndUpdate(
+      oldFolderId,
+      {
+        $pull: { projects: projectId },
+      },
+      { new: true }
+    );
+    console.log(oldFolder);
+    res.send({ success: true, oldFolder, newFolder, project });
   } catch (err) {
+    console.log(err);
     res.send({
       success: false,
       message: "Some error occured",

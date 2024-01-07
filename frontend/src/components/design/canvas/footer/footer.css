@@ -3,6 +3,47 @@
   border-top: solid silver 1px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 0px 10px;
 }
+.canvas-footer-left {
+}
+.canvas-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.zoom-slider-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.zoom-value-box{
+  width: 40px;
+}
+
+.zoom-slider-box input {
+  height: 32px;
+  width: 200px;
+}
+
+
+@media only screen and (max-width: 600px){
+  .canvas-footer-left .header-btn,
+  .canvas-footer-right .header-btn{
+    font-size: larger;
+  }
+  .notes-btn-text,
+  .preview-btn-text{
+    display: none;
+  }
+  .canvas-footer-right{
+    gap: 10px
+  }
+  .zoom-slider-box input {
+    height: 32px;
+    width: 30vw;
+  }
+}
+

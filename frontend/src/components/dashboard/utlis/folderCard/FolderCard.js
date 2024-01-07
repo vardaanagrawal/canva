@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import "./folderCard.css";
 import folderSVG from "./folder.svg";
 import { useDispatch } from "react-redux";
-import { deleteFolder, updateFolder } from "../../../../api";
-import {
-  updateFolderData,
-  updateFolders,
-} from "../../../../redux/actions/userActions";
+// import { deleteFolder } from "../../../../api";
+// import {
+//   updateFolderData,
+//   updateFolders,
+// } from "../../../../redux/actions/userActions";
+import { updateFolder, deleteFolder } from "../../../../redux/actions/folderActions";
 import SpinLoader from "../../../utils/spinLoader/SpinLoader";
+import { Link } from "react-router-dom";
 
 export default function FolderCard({ folder }) {
   const [openOptionsBox, setOpenOptionsBox] = useState(false);
   return (
     <div className="folder-card">
-      <div className="folder-card-img">
-        <img src={folderSVG} alt=""></img>
-      </div>
-      <div className="folder-card-name">{folder.name}</div>
+      <Link to={`/folder/${folder._id}`}>
+        <div className="folder-card-img">
+          <img src={folderSVG} alt=""></img>
+        </div>
+        <div className="folder-card-name">{folder.name}</div>
+      </Link>
       <div
         className="folder-option-btn"
         onClick={() => {
@@ -43,21 +47,15 @@ function FolderOptionsModal({ setOpenOptionsBox, folder }) {
 
   async function starFolder(folder) {
     setStarring(true);
-    const res = await updateFolder({
-      id: folder._id,
-      starred: !folder.starred,
-    });
-    if (res.success) {
-      dispatch(
-        updateFolderData({
-          id: folder._id,
+    dispatch(
+      updateFolder(
+        folder._id,
+        {
           starred: !folder.starred,
-        })
-      );
-    } else {
-      alert(res.message);
-    }
-    setStarring(false);
+        },
+        setStarring
+      )
+    );
   }
 
   async function handleDeleteFolder(folder) {
@@ -66,16 +64,8 @@ function FolderOptionsModal({ setOpenOptionsBox, folder }) {
     );
     setDeleting(true);
     if (sure) {
-      const res = await deleteFolder({
-        id: folder._id,
-      });
-      console.log(res);
-      if (res.success) {
-        setOpenOptionsBox(false);
-        dispatch(updateFolders(res.folders));
-      }
+      dispatch(deleteFolder(folder._id, setDeleting));
     }
-    setDeleting(false);
   }
 
   return (

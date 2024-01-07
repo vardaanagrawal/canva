@@ -6,7 +6,7 @@ import { updateUserDetails } from "../../../../redux/actions/userActions";
 import SpinLoader from "../../../utils/spinLoader/SpinLoader";
 import ProjectCard from "../../utlis/projectCard/ProjectCard";
 import FolderCard from "../../utlis/folderCard/FolderCard";
-import axios from "axios";
+import { createNewFolder } from "../../../../redux/actions/folderActions";
 
 export default function Projects() {
   const [addModal, setAddModal] = useState(false);
@@ -27,9 +27,9 @@ export default function Projects() {
   const [projectModal, setProjectModal] = useState(false);
   const [uploadModal, setUploadModal] = useState(false);
 
-  const projects = useSelector((state) => state.user.projects);
-  const folders = useSelector((state) => state.user.folders);
-  const uploads = useSelector((state) => state.user.uploads);
+  const projects = useSelector((state) => state.projects);
+  const folders = useSelector((state) => state.folders);
+  const uploads = useSelector((state) => state.uploads);
 
   const [nav, setNav] = useState(0);
 
@@ -78,16 +78,17 @@ export default function Projects() {
         {uploadModal && <NewUploadModal setUploadModal={setUploadModal} />}
       </div>
       <div className="projects-body-nav">
-        <div
+        {/* <div
           className="projects-body-nav-selected-marker"
           style={{ left: `${nav * 100 + 15}px` }}
-        ></div>
+        ></div> */}
         <div
           className="projects-body-nav-item"
           onClick={() => {
             setNav(0);
           }}
-          style={{ fontWeight: nav === 0 && "bold" }}
+          // style={{ fontWeight: nav === 0 && "bold" }}
+          style={{ borderBottom: nav === 0 && "solid 4px #8b3dff" }}
         >
           Designs
         </div>
@@ -96,7 +97,8 @@ export default function Projects() {
           onClick={() => {
             setNav(1);
           }}
-          style={{ fontWeight: nav === 1 && "bold" }}
+          // style={{ fontWeight: nav === 1 && "bold" }}
+          style={{ borderBottom: nav === 1 && "solid 4px #8b3dff" }}
         >
           Folders
         </div>
@@ -105,7 +107,8 @@ export default function Projects() {
           onClick={() => {
             setNav(2);
           }}
-          style={{ fontWeight: nav === 2 && "bold" }}
+          // style={{ fontWeight: nav === 2 && "bold" }}
+          style={{ borderBottom: nav === 2 && "solid 4px #8b3dff" }}
         >
           Uploads
         </div>
@@ -169,20 +172,17 @@ export default function Projects() {
 }
 
 function NewFolderModal({ setProjectModal, setNav }) {
-  const user = useSelector((state) => state.user);
-
-  const [name, setName] = useState("");
-  const projects = useSelector((state) => state.user.projects);
+  const dispatch = useDispatch();
+  const projects = useSelector((state) => state.projects);
   const [availableProjects, setAvailableProjects] = useState(
     projects.filter((x) => !x.folder)
   );
-
   useEffect(() => {
-    setAvailableProjects(projects);
+    setAvailableProjects(projects.filter((x) => !x.folder));
   }, [projects]);
 
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
 
   async function handleCreateFolder() {
     setLoading(true);
@@ -192,19 +192,16 @@ function NewFolderModal({ setProjectModal, setNav }) {
       if (a[i].checked) b = [...b, a[i].value];
     }
 
-    const res = await createFolder({
-      name: name,
-      user_id: user._id,
-      projects: b,
-    });
-    setLoading(false);
-    if (res.success) {
-      dispatch(updateUserDetails(res.user));
-      setProjectModal(false);
-      setNav(1);
-    } else {
-      alert(res.message);
-    }
+    dispatch(
+      createNewFolder(
+        {
+          name: name,
+          projects: b,
+        },
+        setLoading,
+        setProjectModal
+      )
+    );
   }
 
   return (
@@ -272,7 +269,8 @@ function NewUploadModal({ setUploadModal }) {
   async function testFunc() {
     // const res = await axios.get("http://localhost:5000/api/auth/test");
     // console.log(res);
-    window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?client_id=935328519410-r1fteedhjia91adkoagjjqb5q4sdvh8k.apps.googleusercontent.com&redirect_uri=http://localhost:5000/api/auth/google&response_type=code&scope=profile%20email"
+    window.location.href =
+      "https://accounts.google.com/o/oauth2/v2/auth?client_id=935328519410-r1fteedhjia91adkoagjjqb5q4sdvh8k.apps.googleusercontent.com&redirect_uri=http://localhost:5000/api/auth/google&response_type=code&scope=profile%20email";
   }
   return (
     <div

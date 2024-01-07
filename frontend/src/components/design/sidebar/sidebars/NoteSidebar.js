@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateNotes } from "../../../../redux/actions/currentProjectActions";
 
 export default function NoteSidebar() {
   const current_project = useSelector((state) => state.current_project);
   const [notes, setNotes] = useState(current_project.notes);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(updateNotes(notes));
+  }, [notes]);
+
   return (
     <div className="sidebar2-inner">
       <div className="sidebar2-title">Notes</div>

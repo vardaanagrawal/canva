@@ -23,6 +23,11 @@
   display: none;
 }
 
+.mobile-nav-container a{
+  color: black;
+}
+
+
 @media only screen and (max-width: 650px) {
   .dashboard-bottom{
     flex-direction: column;
@@ -35,6 +40,9 @@
     width: 100%;
   }
   .mobile-nav-container{
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: x-large;
   }
 }

@@ -9,6 +9,7 @@ import Design from "../components/design/Design";
 import { useDispatch } from "react-redux";
 import { getUser } from "../api";
 import { updateUserDetails } from "../redux/actions/userActions";
+import Folder from "../components/dashboard/outlets/folder/Folder";
 
 export default function ProtectedRoutes() {
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,7 @@ export default function ProtectedRoutes() {
       <Route exact path="/" element={<Dashboard />}>
         <Route exact path="" element={<Home />}></Route>
         <Route exact path="/projects" element={<Projects />}></Route>
+        <Route exact path="/folder/:id" element={<Folder />}></Route>
       </Route>
       <Route path="/design/:id/edit" element={<Design />}></Route>
     </Routes>

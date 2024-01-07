@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import "./navbar.css";
 import { useDispatch, useSelector } from "react-redux";
-
-import logo from "../../../images/logo.svg";
 import { useNavigate } from "react-router-dom";
+// components
+import logo from "../../../images/logo.svg";
 import SpinLoader from "../../utils/spinLoader/SpinLoader";
+// functions
 import { createNewProject } from "../../../redux/actions/projectActions";
 
 export default function Navbar() {
@@ -71,8 +72,8 @@ export default function Navbar() {
 const newProjectsList = [
   {
     name: "Document (Landscape)",
-    height: 400,
-    width: 800,
+    height: 500,
+    width: 750,
     bg_color: "#ffffff",
   },
   {
@@ -90,7 +91,7 @@ const newProjectsList = [
 ];
 
 function CreateDropdown({ cdRef }) {
-  const projects = useSelector((state) => state.user.projects);
+  const projects = useSelector((state) => state.projects);
   const [loading, setLoading] = useState(-1);
 
   const dispatch = useDispatch();

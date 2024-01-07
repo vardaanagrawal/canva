@@ -7,8 +7,8 @@ export function createNewProject(projectData, navigate, setLoading) {
       setLoading(-1);
       if (data.success) {
         dispatch({
-          type: "CREATE_PROJECT",
-          payload: data.project_details,
+          type: "CREATE_PROJECT_2",
+          payload: data.project,
         });
         navigate(`/design/${data.project_details._id}/edit`);
       } else {
@@ -16,7 +16,6 @@ export function createNewProject(projectData, navigate, setLoading) {
       }
     } catch (err) {
       alert(err.response.data);
-      return;
     }
   };
 }
@@ -29,14 +28,32 @@ export function deleteProject(projectId, setDeleting, setOpenOptionsBox) {
       if (data.success) {
         setOpenOptionsBox(false);
         dispatch({
-          type: "DELETE_PROJECT",
+          type: "DELETE_PROJECT_2",
           payload: projectId,
         });
       } else {
         alert(data.message);
       }
     } catch (err) {
-      //   console.log(err);
+      alert(err.response.data);
+    }
+  };
+}
+
+export function moveProject(projectData, setMoving) {
+  return async function (dispatch) {
+    try {
+      const { data } = await api.moveProject(projectData);
+      setMoving(false);
+      if (data.success) {
+        dispatch({
+          type: "MOVE_PROJECT_2",
+          payload: data,
+        });
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
       alert(err.response.data);
     }
   };

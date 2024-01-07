@@ -37,6 +37,16 @@ const current_project = (state = {}, action) => {
       ...state,
       components: updatedComponents,
     };
+  } else if (action.type === "update_project_name") {
+    state = {
+      ...state,
+      name: action.payload.name,
+    };
+  } else if (action.type === "UPDATE_NOTES") {
+    state = {
+      ...state,
+      notes: action.payload,
+    };
   }
   return state;
 };

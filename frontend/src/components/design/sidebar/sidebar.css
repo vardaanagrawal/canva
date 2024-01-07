@@ -7,6 +7,9 @@
   background-color: #18191b;
   overflow: scroll;
 }
+.sidebar1::-webkit-scrollbar {
+  display: none;
+}
 .cs-item {
   padding: 20px 5px;
   color: rgb(156, 156, 156);
@@ -36,20 +39,23 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  background-color: red;
 }
 .sidebar2-close-btn {
-  width: 15px;
-  right: -15px;
-  top: calc(50% - 50px);
-  position: absolute;
   height: 100px;
+  width: 15px;
+  top: calc(50% - 50px);
+  right: -15px;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0px 10px 10px 0px;
   cursor: pointer;
   background-color: #252627;
+  z-index: 1;
+}
+.sidebar2-close-btn-mobile{
+  display: none;
 }
 
 .sidebar2-inner {
@@ -70,6 +76,9 @@
   overflow: scroll;
   position: relative;
   padding: 15px;
+}
+.sidebar2-body::-webkit-scrollbar {
+  display: none;
 }
 .elements-sidebar-body {
   display: grid;
@@ -228,14 +237,24 @@
   cursor: not-allowed;
   color: silver;
 }
-.position-advanced-disabled{
+.position-advanced-disabled {
   cursor: not-allowed;
   color: silver;
 }
 
 .position-advanced-input-disabled {
-  border: solid 1px rgb(36, 36, 36) !important;
+  border: solid 1px darkgray;
   cursor: not-allowed;
+}
+.position-advanced-input-disabled::-webkit-outer-spin-button,
+.position-advanced-input-disabled::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.position-advanced-input-disabled {
+  -moz-appearance: textfield;
 }
 
 .position-align-item-disabled:hover {
@@ -298,7 +317,14 @@
   width: 100%;
   aspect-ratio: 16/9;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: #f2f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-sidebar-item-img img {
+  height: 60px;
+  border-radius: 3px;
 }
 .project-sidebar-item-img:hover {
   filter: brightness(80%);
@@ -306,4 +332,44 @@
 .projects-sidebar-body a {
   text-decoration: none;
   color: silver;
+}
+
+@media only screen and (max-width: 600px) {
+  .canvas-sidebar{
+    position: relative;
+  }
+  .sidebar1 {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+  }
+  .cs-item {
+    height: 60px;
+    width: 60px;
+    padding: 0px;
+  }
+  .sidebar2 {
+    position: absolute;
+    left: 0px;
+    top: -80vh;
+    height: 80vh;
+    width: 100vw;
+    z-index: 100000000;
+    background-color: red;
+  }
+  .sidebar2-close-btn{
+    height: 20px;
+    width: 100px;
+    top: -20px;
+    left: calc(50% - 50px);
+    border-radius: 10px 10px 0px 0px;
+  }
+  .sidebar2-close-btn-desktop{
+    display: none;
+  }
+  .sidebar2-close-btn-mobile{
+    display: block;
+  }
 }

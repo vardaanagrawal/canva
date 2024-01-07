@@ -5,9 +5,15 @@
   display: block;
   width: 100%;
   aspect-ratio: 3/2;
-  background-color: silver;
+  background-color: #f2f3f5;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-card-img img{
+  border-radius: 5px;
 }
 .project-card-name {
   font-size: small;
@@ -111,7 +117,7 @@
   gap: 20px;
   font-size: x-large;
 }
-.mtf-head i{
+.mtf-head i {
   cursor: pointer;
 }
 .mtf-body {
@@ -135,7 +141,7 @@
   height: 20px;
   width: 20px;
 }
-.mtf-item label{
+.mtf-item label {
   height: 100%;
   padding: 0px 50px;
   width: calc(100% - 100px);
@@ -158,4 +164,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.project-folder-tag {
+  font-size: x-small;
+  color: gray;
+  background-color: whitesmoke;
+  width: max-content;
+  padding: 2px 5px;
+  border-radius: 2px;
 }

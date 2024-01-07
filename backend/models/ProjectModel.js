@@ -17,6 +17,7 @@ const projectSchema = mongoose.Schema(
     components: [{ type: mongoose.Schema.Types.ObjectId, ref: "Components" }],
     notes: { type: String, default: "" },
     folder: { type: mongoose.Schema.Types.ObjectId, ref: "Folders" },
+    thumbnail: { type: String, default: "" },
   },
   {
     timestamps: true,

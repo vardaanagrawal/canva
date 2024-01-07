@@ -14,7 +14,7 @@ export default function PositionSidebar() {
     setHeight(selected_component.height ? selected_component.height : 0);
     setWidth(selected_component.width ? selected_component.width : 0);
     setX(selected_component.x ? selected_component.x : 0);
-    setY(selected_component.y ? selected_component.x : 0);
+    setY(selected_component.y ? selected_component.y : 0);
     setFlag(1);
   }, [selected_component]);
 
@@ -34,7 +34,6 @@ export default function PositionSidebar() {
         components[index].x !== x ||
         components[index].y !== y
       ) {
-        console.log("first");
         dispatch(
           manageElement({
             action: "update",
@@ -61,7 +60,6 @@ export default function PositionSidebar() {
   const [xyDisabled, setXyDisabled] = useState(true);
 
   useEffect(() => {
-    console.log(selected_component);
     if (selected_component.component_type === 0) {
       setAlignDisabled(true);
       setHwDisabled(true);
@@ -244,8 +242,9 @@ export default function PositionSidebar() {
               <input
                 type="Number"
                 className={`position-sidebar-advanced-input ${
-                  hwDisabled && "position-advanced-input-diabled"
+                  hwDisabled && "position-advanced-input-disabled"
                 }`}
+                disabled={hwDisabled}
                 value={height}
                 onChange={(e) => {
                   if (!hwDisabled) {
@@ -269,8 +268,9 @@ export default function PositionSidebar() {
               <input
                 type="Number"
                 className={`position-sidebar-advanced-input ${
-                  hwDisabled && "position-advanced-input-diabled"
+                  hwDisabled && "position-advanced-input-disabled"
                 }`}
+                disabled={hwDisabled}
                 value={width}
                 onChange={(e) => {
                   if (!hwDisabled) {
@@ -294,8 +294,9 @@ export default function PositionSidebar() {
               <input
                 type="Number"
                 className={`position-sidebar-advanced-input ${
-                  xyDisabled && "position-advanced-input-diabled"
+                  xyDisabled && "position-advanced-input-disabled"
                 }`}
+                disabled={xyDisabled}
                 value={x}
                 onChange={(e) => {
                   if (!xyDisabled) {
@@ -316,8 +317,9 @@ export default function PositionSidebar() {
               <input
                 type="Number"
                 className={`position-sidebar-advanced-input ${
-                  xyDisabled && "position-advanced-input-diabled"
+                  xyDisabled && "position-advanced-input-disabled"
                 }`}
+                disabled={xyDisabled}
                 value={y}
                 onChange={(e) => {
                   if (!xyDisabled) {

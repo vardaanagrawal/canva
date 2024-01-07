@@ -1,42 +1,24 @@
-.canvas-body-outer {
-  height: calc(100% - 140px);
-  padding: 20px;
-  background-color: #ebecf0;
-  display: grid;
-  place-items: center;
-  overflow: scroll;
-}
-
 .canvas-body {
-  padding: 0px;
+  height: calc(100% - 200px);
+  width: calc(100% - 100px);
+  /* max-width: calc(700px); */
+  padding: 50px 50px;
+  overflow: scroll;
   display: grid;
   place-items: center;
-  /* overflow: hidden; */
+  background-color: #ebecf0;
 }
-
-.canvas-page {
-  background-color: white;
+.canvas-outer {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
-.selected_component {
-  outline: solid orangered 3px;
+.canvas {
+  position: relative;
+  transform-origin: 0 0;
 }
 
 .textbox-component-input {
-  background: none;
-  border: none;
-  width: 200px;
-  cursor: move;
+  text-align: center;
 }
 .textbox-component-input:focus {
   outline: none;
-}
-
-.shape-component:hover,
-.image-component:hover,
-.text-box-component:hover {
-  outline: solid orangered 3px;
-}
-.shape-component{
-  transform-origin: top left;
 }
