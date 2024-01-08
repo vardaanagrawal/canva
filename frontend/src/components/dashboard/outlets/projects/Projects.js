@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./projects.css";
-import { createFolder } from "../../../../api";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserDetails } from "../../../../redux/actions/userActions";
 import SpinLoader from "../../../utils/spinLoader/SpinLoader";
 import ProjectCard from "../../utlis/projectCard/ProjectCard";
 import FolderCard from "../../utlis/folderCard/FolderCard";
-import { createNewFolder } from "../../../../redux/actions/folderActions";
+import { createNewFolder } from "../../../../redux/actions/x3FoldersActions";
 
 export default function Projects() {
   const [addModal, setAddModal] = useState(false);
@@ -61,14 +59,14 @@ export default function Projects() {
               >
                 <i className="fa-regular fa-folder"></i>Folder
               </div>
-              <div
+              {/* <div
                 className="project-add-new-item"
                 onClick={() => {
                   setUploadModal(true);
                 }}
               >
                 <i className="fa-solid fa-arrow-up"></i>Upload
-              </div>
+              </div> */}
             </div>
           )}
         </div>
@@ -102,7 +100,7 @@ export default function Projects() {
         >
           Folders
         </div>
-        <div
+        {/* <div
           className="projects-body-nav-item"
           onClick={() => {
             setNav(2);
@@ -111,7 +109,7 @@ export default function Projects() {
           style={{ borderBottom: nav === 2 && "solid 4px #8b3dff" }}
         >
           Uploads
-        </div>
+        </div> */}
       </div>
       {nav === 0 && projects.length === 0 && (
         <div className="no-projects-box">
@@ -192,16 +190,15 @@ function NewFolderModal({ setProjectModal, setNav }) {
       if (a[i].checked) b = [...b, a[i].value];
     }
 
-    dispatch(
-      createNewFolder(
-        {
-          name: name,
-          projects: b,
-        },
-        setLoading,
-        setProjectModal
-      )
+    await dispatch(
+      createNewFolder({
+        name: name,
+        projects: b,
+      })
     );
+    setLoading(false);
+    setProjectModal(false);
+    setNav(1);
   }
 
   return (

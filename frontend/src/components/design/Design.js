@@ -6,7 +6,7 @@ import Navbar from "./navbar/Navbar";
 import Sidebar from "./sidebar/Sidebar";
 import Canvas from "./canvas/Canvas";
 import { getProjectDetails } from "../../api";
-import { updateCurrentProject } from "../../redux/actions/currentProjectActions";
+import { updateCurrentProject } from "../../redux/actions/x5ProjectActions";
 
 export default function Design() {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export default function Design() {
     }
   }
 
-  const currentProject = useSelector((state) => state.current_project);
+  const currentProject = useSelector((state) => state.project);
   const [loading, setLoading] = useState(true);
   const [notAuthorized, setNotAuthorized] = useState(true);
   const [notFound, setNotFound] = useState(true);

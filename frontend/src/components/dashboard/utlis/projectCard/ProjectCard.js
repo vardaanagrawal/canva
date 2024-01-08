@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./projectCard.css";
 import { Link } from "react-router-dom";
-import { deleteProject } from "../../../../redux/actions/projectActions";
 import { useDispatch, useSelector } from "react-redux";
 import SpinLoader from "../../../utils/spinLoader/SpinLoader";
-// import { moveProject } from "../../../../api";
-import { moveProject } from "../../../../redux/actions/projectActions";
+import {
+  moveProject,
+  deleteProject,
+  copyProject,
+} from "../../../../redux/actions/x2ProjectsActions";
 
 export default function ProjectCard({ project }) {
   const [openOptionsBox, setOpenOptionsBox] = useState(false);
@@ -50,9 +52,11 @@ export default function ProjectCard({ project }) {
 
 function ProjectOptionsModal({ setOpenOptionsBox, project }) {
   const dispatch = useDispatch();
-  function handleDeleteProject() {
+  async function handleDeleteProject() {
     setDeleting(true);
-    dispatch(deleteProject(project._id, setDeleting, setOpenOptionsBox));
+    await dispatch(deleteProject(project));
+    setDeleting(false);
+    setOpenOptionsBox(false);
   }
   const [deleting, setDeleting] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -71,8 +75,17 @@ function ProjectOptionsModal({ setOpenOptionsBox, project }) {
         from: project.folder,
         to: selectedFolder.value,
       };
-      dispatch(moveProject(data, setMoving));
+      await dispatch(moveProject(data, setMoving));
     }
+    setMoving(false);
+    setMove(false);
+  }
+
+  const [copyLoading, setCopyLoading] = useState(false);
+  async function handleCopyProject() {
+    await dispatch(copyProject(project._id));
+    setCopyLoading(false);
+    setOpenOptionsBox(false);
   }
 
   return (
@@ -100,8 +113,28 @@ function ProjectOptionsModal({ setOpenOptionsBox, project }) {
             <div className="options-name">{project.name}</div>
           </div>
           <div className="options-body">
-            <div className="options-box-item">
-              <i className="fa-regular fa-copy"></i> Make a copy
+            <div
+              className="options-box-item"
+              onClick={() => {
+                setCopyLoading(true);
+                handleCopyProject();
+              }}
+            >
+              <div
+                style={{
+                  height: "25px",
+                  width: "25px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {!copyLoading && <i className="fa-regular fa-copy"></i>}
+                {copyLoading && (
+                  <SpinLoader height={18} width={18} color="black" />
+                )}
+              </div>
+              Make a copy
             </div>
             <div
               className="options-box-item"

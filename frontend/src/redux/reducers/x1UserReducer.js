@@ -4,15 +4,11 @@ const initial_state = {
   _id: "",
 };
 
-const user2 = (state = initial_state, action) => {
-  if (action.type === "UPDATE_USER_2") {
-    state = {
-      _id: action.payload._id,
-      name: action.payload.name,
-      email: action.payload.email,
-    };
+const user = (state = initial_state, action) => {
+  if (action.type === "SET_USER") {
+    state = action.payload;
   }
   return state;
 };
 
-export default user2;
+export default user;

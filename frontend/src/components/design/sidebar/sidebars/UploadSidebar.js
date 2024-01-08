@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateImageInDb, uploadImg } from "../../../../api";
-import { updateUploads } from "../../../../redux/actions/userActions";
+import { updateUploads } from "../../../../redux/actions/x4UploadsActions";
 import {
-  addComponent,
   manageElement,
-} from "../../../../redux/actions/currentProjectActions";
-import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+} from "../../../../redux/actions/x5ProjectActions";
+import { setSelectedComponent } from "../../../../redux/actions/x6ComponentActions";
 
 export default function UploadSidebar() {
   const [img, setImg] = useState();

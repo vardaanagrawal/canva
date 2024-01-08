@@ -1,14 +1,14 @@
 import React from "react";
-import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+import { setSelectedComponent } from "../../../../redux/actions/x6ComponentActions";
 import { useDispatch, useSelector } from "react-redux";
 import { font_styles } from "../utils";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
 
 export default function TextSidebar() {
   const dispatch = useDispatch();
   const sidebar2 = useSelector((state) => state.sidebar2);
-  const selected_component = useSelector((state) => state.selected_component);
-  const components = useSelector((state) => state.current_project.components);
+  const selected_component = useSelector((state) => state.component);
+  const components = useSelector((state) => state.project.components);
 
   function handleClick(item) {
     // if new text box is to be added

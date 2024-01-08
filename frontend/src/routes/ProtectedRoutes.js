@@ -8,7 +8,7 @@ import Design from "../components/design/Design";
 
 import { useDispatch } from "react-redux";
 import { getUser } from "../api/userAPI";
-import { updateUserDetails } from "../redux/actions/userActions";
+import { setUser } from "../redux/actions/x1UserActions";
 import Folder from "../components/dashboard/outlets/folder/Folder";
 
 export default function ProtectedRoutes() {
@@ -21,8 +21,8 @@ export default function ProtectedRoutes() {
       fetchUserDetails(token);
     } else {
       // user id not found in local storage so setting loading and protected false so that it can redirect to login
-      // navigate("/login");
       console.log("token not found");
+      navigate("/login");
     }
   }, []);
 
@@ -35,12 +35,12 @@ export default function ProtectedRoutes() {
     if (res.success) {
       // user found in database
       // updating user details in redux
-      dispatch(updateUserDetails(res.user));
+      dispatch(setUser(res.user));
       setLoading(false);
     } else {
       // user not found in database
-      // navigate("/login");
       console.log("get user response not success");
+      navigate("/login");
     }
   }
   return loading ? (

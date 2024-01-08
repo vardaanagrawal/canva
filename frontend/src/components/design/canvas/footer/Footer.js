@@ -1,7 +1,7 @@
 import React from "react";
 import "./footer.css";
 import { useDispatch } from "react-redux";
-import { showSidebar2 } from "../../../../redux/actions/sidebar2Actions";
+import { showSidebar2 } from "../../../../redux/actions/x7Sidebar2Actions";
 
 export default function Footer({ zoom, setZoom }) {
   const dispatch = useDispatch();

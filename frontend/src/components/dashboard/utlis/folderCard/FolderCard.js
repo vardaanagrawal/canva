@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import "./folderCard.css";
 import folderSVG from "./folder.svg";
 import { useDispatch } from "react-redux";
-// import { deleteFolder } from "../../../../api";
-// import {
-//   updateFolderData,
-//   updateFolders,
-// } from "../../../../redux/actions/userActions";
-import { updateFolder, deleteFolder } from "../../../../redux/actions/folderActions";
+import {
+  updateFolder,
+  deleteFolder,
+} from "../../../../redux/actions/x3FoldersActions";
 import SpinLoader from "../../../utils/spinLoader/SpinLoader";
 import { Link } from "react-router-dom";
 
@@ -47,25 +45,18 @@ function FolderOptionsModal({ setOpenOptionsBox, folder }) {
 
   async function starFolder(folder) {
     setStarring(true);
-    dispatch(
-      updateFolder(
-        folder._id,
-        {
-          starred: !folder.starred,
-        },
-        setStarring
-      )
+    await dispatch(
+      updateFolder(folder._id, {
+        starred: !folder.starred,
+      })
     );
+    setStarring(false);
   }
 
   async function handleDeleteFolder(folder) {
-    const sure = window.confirm(
-      `Are you sure you want to delete ${folder.name} folder?`
-    );
     setDeleting(true);
-    if (sure) {
-      dispatch(deleteFolder(folder._id, setDeleting));
-    }
+    await dispatch(deleteFolder(folder._id, setDeleting));
+    setDeleting(false);
   }
 
   return (

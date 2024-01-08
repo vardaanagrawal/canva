@@ -1,7 +1,7 @@
 import React from "react";
 import "./sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { showSidebar2 } from "../../../redux/actions/sidebar2Actions";
+import { showSidebar2 } from "../../../redux/actions/x7Sidebar2Actions";
 
 import { items } from "./utils";
 

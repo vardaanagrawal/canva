@@ -1,28 +1,23 @@
 import { combineReducers } from "redux";
-import user from "./userReducer";
-import current_project from "./projectReducer";
-import selected_component from "./selectedComponentReducer";
-import sidebar2 from "./sidebar2Reducer";
-import { undo, redo } from "./undoRedoReducer";
-
-// ==========================================================
-import user2 from "./x1UserReducer";
-import projects2 from "./x2ProjectReducer";
-import folders2 from "./x3FolderReducer";
-import uploads2 from "./x4UploadsReducer";
+import user from "./x1UserReducer";
+import projects from "./x2ProjectsReducer";
+import folders from "./x3FoldersReducer";
+import uploads from "./x4UploadsReducer";
+import project from "./x5ProjectReducer";
+import component from "./x6ComponentReducer";
+import sidebar2 from "./x7Sidebar2Reducer";
+import { undo, redo } from "./x8UndoRedoReducer";
 
 const reducers = combineReducers({
-  // user,
-  current_project,
-  selected_component,
+  user: user,
+  projects,
+  folders,
+  uploads,
+  project,
+  component,
   sidebar2,
   undo,
   redo,
-  // ========================================================
-  user: user2,
-  projects: projects2,
-  folders: folders2,
-  uploads: uploads2,
 });
 
 export default reducers;

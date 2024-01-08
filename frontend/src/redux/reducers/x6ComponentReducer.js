@@ -1,4 +1,4 @@
-const selected_component = (
+const component = (
   state = {
     component_type: 0,
   },
@@ -10,4 +10,4 @@ const selected_component = (
   return state;
 };
 
-export default selected_component;
+export default component;

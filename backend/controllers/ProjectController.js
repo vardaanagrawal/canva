@@ -42,12 +42,92 @@ const createProject = async (req, res) => {
   res.send({
     success: true,
     message: "New project created",
-    project_details: newProject,
+    // project_details: newProject,
     project: {
       _id: newProject._id,
       name: newProject.name,
       updatedAt: newProject.updatedAt,
       folder: newProject.folder,
+      thumbnail: newProject.thumbnail,
+    },
+  });
+};
+// #############################################################################################
+// #############################################################################################
+
+const copyProject = async (req, res) => {
+  const userId = req.user.id;
+  const { projectId } = req.body;
+  const project = await Project.findById(projectId, ["-_id", "-folder"]);
+  const canvas = await Canvas.findById(project.canvas, ["-_id", "-__v"]);
+
+  async function copyAndRetrieveNewIds(idsToCopy) {
+    try {
+      // Step 1: Retrieve the Documents to Copy
+      const existingDocuments = await Components.find(
+        {
+          _id: { $in: idsToCopy },
+        },
+        "-_id"
+      );
+
+      // Step 2: Create Copies with New `_id` and Save
+      const newDocuments = await Promise.all(
+        existingDocuments.map(async (oldDoc) => {
+          const newDoc = new Components(oldDoc.toObject());
+          // Optional: You can modify any fields of the new document here before saving.
+          await newDoc.save();
+          return newDoc._id;
+        })
+      );
+      return newDocuments;
+    } catch (error) {
+      console.error(error);
+      throw error; // You can choose to handle the error here or propagate it up.
+    }
+  }
+
+  // creating new components
+  const newComponents = await copyAndRetrieveNewIds(project.components);
+
+  // creating new canvas
+  const newCanvas = new Canvas(canvas.toObject());
+  await newCanvas.save();
+
+  // creating new project
+  const newProject = new Project({
+    ...project.toObject(),
+    name: project.name + " (Copy)",
+    components: newComponents,
+    canvas: newCanvas._id,
+    user: userId,
+  });
+  // console.log(newProject);
+  // console.log("new project: ", newProject);
+  await newProject.save().then((project) => {
+    // Update the user's projects array
+    User.findByIdAndUpdate(
+      userId,
+      { $push: { projects: project._id } },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        // console.log(updatedUser);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  res.send({
+    success: true,
+    message: "project copied",
+    project: {
+      _id: newProject._id,
+      name: newProject.name,
+      updatedAt: newProject.updatedAt,
+      folder: newProject.folder,
+      thumbnail: newProject.thumbnail,
     },
   });
 };
@@ -174,7 +254,17 @@ const moveProject = async (req, res) => {
       { new: true }
     );
     console.log(oldFolder);
-    res.send({ success: true, oldFolder, newFolder, project });
+    res.send({
+      success: true,
+      oldFolder,
+      newFolder,
+      project: {
+        _id: project._id,
+        name: project.name,
+        folder: project.folder,
+        thumbnail: project.thumbanil,
+      },
+    });
   } catch (err) {
     console.log(err);
     res.send({
@@ -250,6 +340,7 @@ const getProjectById = async (req, res) => {
 
 module.exports = {
   createProject,
+  copyProject,
   getProject,
   updateProject,
   uploadImage,

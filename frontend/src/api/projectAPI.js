@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// const base_url = process.env.REACT_APP_API_BASE_URL;
+// const base_url = "http://localhost:5000";
 const base_url = "";
 const token = localStorage.getItem("Canva_User");
 
@@ -8,6 +8,15 @@ const token = localStorage.getItem("Canva_User");
 // creating new project -------------------------------------------------------
 export async function createNewProject(data) {
   const res = await axios.post(`${base_url}/api/project`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
+}
+// copy project -------------------------------------------------------
+export async function copyProject(data) {
+  const res = await axios.post(`${base_url}/api/project/copy`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -25,12 +34,12 @@ export async function deleteProject(project_id) {
 }
 // move project to different folder -------------------------------------------
 export async function moveProject(data) {
-    const res = await axios.put(`${base_url}/api/project/move`, data, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    return res;
+  const res = await axios.put(`${base_url}/api/project/move`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
 }
 
 // save a project ---------------------------------------------------------

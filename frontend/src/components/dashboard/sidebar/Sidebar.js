@@ -1,30 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  HomeIcon,
+  ProjectsIcon,
+  SettingsIcon,
+  TrashIcon,
+} from "../../utils/icons/icons";
 
 export default function Sidebar() {
+  const location = useLocation();
   const user = useSelector((state) => state.user);
+  const name = user.name.split(" ");
+  const nameInitials = name.map((word) => word.charAt(0)).join("");
   return (
     <div className="sidebar">
       <div className="sidebar-top">
-        <div className="sidebar-profile">
-          <div className="sidebar-profile-photo"></div>
+        <div className="sidebar-profile-photo">{nameInitials}</div>
+        <div className="sidebar-profile-text">
           <div className="sidebar-profile-name">{user.name}</div>
+          <div className="sidebar-profile-email">{user.email}</div>
         </div>
-        <Link to="/" className="sidebar-item">
-          <i className="fa-solid fa-house"></i>Home
+      </div>
+      <div className="sidebar-middle">
+        <Link
+          to="/"
+          className={
+            location.pathname === "/"
+              ? "sidebar-item sidebar-item-selected"
+              : "sidebar-item"
+          }
+        >
+          <HomeIcon />
+          Home
         </Link>
-        <Link to="/projects" className="sidebar-item">
-          <i className="fa-solid fa-folder"></i>Projects
+        <Link
+          to="/projects"
+          className={
+            location.pathname === "/projects"
+              ? "sidebar-item sidebar-item-selected"
+              : "sidebar-item"
+          }
+        >
+          <ProjectsIcon />
+          Projects
         </Link>
       </div>
       <div className="sidebar-bottom">
         <div className="sidebar-item">
-          <i className="fa-solid fa-trash"></i>Trash
+          <TrashIcon />
+          Trash
         </div>
         <div className="sidebar-item">
-          <i className="fa-solid fa-gear"></i>Settings
+          <SettingsIcon />
+          Settings
         </div>
       </div>
     </div>

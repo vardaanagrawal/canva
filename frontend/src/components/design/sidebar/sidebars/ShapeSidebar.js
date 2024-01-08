@@ -1,14 +1,14 @@
 import React from "react";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
-import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
+import { setSelectedComponent } from "../../../../redux/actions/x6ComponentActions";
 import { useDispatch, useSelector } from "react-redux";
 import { shapes } from "../utils";
 
 export default function ShapeSidebar() {
   const dispatch = useDispatch();
   const sidebar2 = useSelector((state) => state.sidebar2);
-  const selected_component = useSelector((state) => state.selected_component);
-  const components = useSelector((state) => state.current_project.components);
+  const selected_component = useSelector((state) => state.component);
+  const components = useSelector((state) => state.project.components);
 
   function handleClick(item) {
     // if a new shape is to be added

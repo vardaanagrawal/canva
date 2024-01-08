@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   manageElement,
   saveProject, // used while saving the project
-} from "../../../redux/actions/currentProjectActions";
-import { setSelectedComponent } from "../../../redux/actions/selectedComponentActions";
+} from "../../../redux/actions/x5ProjectActions";
+import { setSelectedComponent } from "../../../redux/actions/x6ComponentActions";
 
 import SpinLoader from "../../utils/spinLoader/SpinLoader";
 
 export default function Navbar() {
-  const currentProject = useSelector((state) => state.current_project);
+  const currentProject = useSelector((state) => state.project);
   const [name, setName] = useState(currentProject.name);
   const dispatch = useDispatch();
 

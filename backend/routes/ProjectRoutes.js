@@ -3,17 +3,19 @@ const router = express.Router();
 
 const {
   createProject,
+  copyProject,
   getProject,
   updateProject,
   uploadImage,
   getProjectById,
   deleteProject,
-  moveProject
+  moveProject,
 } = require("../controllers/ProjectController");
 const { authenticateUser } = require("../middleware/auth");
 
 router.post("/", authenticateUser, createProject); // create new project
-router.put("/",  updateProject); // update changes in existing project
+router.post("/copy", authenticateUser, copyProject); // copy project
+router.put("/", updateProject); // update changes in existing project
 router.delete("/:projectId", authenticateUser, deleteProject); // deletes project
 router.put("/move", authenticateUser, moveProject); // move project to different folder
 

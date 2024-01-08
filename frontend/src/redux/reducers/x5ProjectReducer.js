@@ -1,4 +1,4 @@
-const current_project = (state = {}, action) => {
+const project = (state = {}, action) => {
   if (action.type === "UPDATE_CURRENT_PROJECT") {
     state = action.payload;
   } else if (action.type === "update_canvas") {
@@ -51,4 +51,4 @@ const current_project = (state = {}, action) => {
   return state;
 };
 
-export default current_project;
+export default project;

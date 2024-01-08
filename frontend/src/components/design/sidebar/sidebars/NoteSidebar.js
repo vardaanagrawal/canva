@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateNotes } from "../../../../redux/actions/currentProjectActions";
+import { updateNotes } from "../../../../redux/actions/x5ProjectActions";
 
 export default function NoteSidebar() {
-  const current_project = useSelector((state) => state.current_project);
+  const current_project = useSelector((state) => state.project);
   const [notes, setNotes] = useState(current_project.notes);
   const dispatch = useDispatch();
   useEffect(() => {

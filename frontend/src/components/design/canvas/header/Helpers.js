@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showSidebar2 } from "../../../../redux/actions/sidebar2Actions";
-import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
+import { showSidebar2 } from "../../../../redux/actions/x7Sidebar2Actions";
+import { setSelectedComponent } from "../../../../redux/actions/x6ComponentActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
 
 export function HeaderDivider() {
   return <div className="header-divider"></div>;
@@ -68,8 +68,8 @@ export function BgColorButton() {
 
 export function FontFamilyButton() {
   const dispatch = useDispatch();
-  const selected_component = useSelector((state) => state.selected_component);
-  const current_project = useSelector((state) => state.current_project);
+  const selected_component = useSelector((state) => state.component);
+  const current_project = useSelector((state) => state.project);
   const [font_family, setFontFamily] = useState(selected_component.font_family);
   useEffect(() => {
     const cur_component = current_project.components.filter(
@@ -97,9 +97,9 @@ export function FontFamilyButton() {
 
 export function FontSizeButton() {
   const dispatch = useDispatch();
-  const selected_component = useSelector((state) => state.selected_component);
+  const selected_component = useSelector((state) => state.component);
   const [font_size, setFontSize] = useState(selected_component.font_size);
-  const components = useSelector((state) => state.current_project.components);
+  const components = useSelector((state) => state.project.components);
 
   useEffect(() => {
     setFontSize(selected_component.font_size);
@@ -153,11 +153,11 @@ export function FontSizeButton() {
 
 export function FontEditRow() {
   const dispatch = useDispatch();
-  const selected_component = useSelector((state) => state.selected_component);
+  const selected_component = useSelector((state) => state.component);
   const [bold, setBold] = useState(selected_component.text_bold);
   const [italic, setItalic] = useState(selected_component.text_italic);
   const [underline, setUnderline] = useState(selected_component.text_underline);
-  const components = useSelector((state) => state.current_project.components);
+  const components = useSelector((state) => state.project.components);
 
   useEffect(() => {
     setBold(selected_component.text_bold);
@@ -237,8 +237,8 @@ export function EditPhotoButton() {
 
 export function DuplicateButton() {
   const dispatch = useDispatch();
-  const selected_component = useSelector((state) => state.selected_component);
-  const current_project = useSelector((state) => state.current_project);
+  const selected_component = useSelector((state) => state.component);
+  const current_project = useSelector((state) => state.project);
   function duplicate() {
     const id = Math.floor(Math.random() * 900) + 100;
     const a = current_project.components.filter(
@@ -277,8 +277,8 @@ export function DuplicateButton() {
 }
 export function DeleteButton() {
   const dispatch = useDispatch();
-  const selected_component = useSelector((state) => state.selected_component);
-  const components = useSelector((state) => state.current_project.components);
+  const selected_component = useSelector((state) => state.component);
+  const components = useSelector((state) => state.project.components);
 
   async function deleteItem() {
     const index = components.findIndex(

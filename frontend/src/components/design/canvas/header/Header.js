@@ -16,7 +16,7 @@ import {
 } from "./Helpers";
 
 export default function Header() {
-  const selected_component = useSelector((state) => state.selected_component);
+  const selected_component = useSelector((state) => state.component);
   return (
     <div className="canvas-header">
       {selected_component.component_type === 0 && <Type0 />}

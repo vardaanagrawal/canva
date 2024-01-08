@@ -1,6 +1,6 @@
 import React from "react";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
-import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
+import { setSelectedComponent } from "../../../../redux/actions/x6ComponentActions";
 import { useDispatch } from "react-redux";
 import { images } from "../utils";
 

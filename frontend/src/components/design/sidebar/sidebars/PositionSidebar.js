@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
 
 export default function PositionSidebar() {
-  const selected_component = useSelector((state) => state.selected_component);
-  const components = useSelector((state) => state.current_project.components);
+  const selected_component = useSelector((state) => state.component);
+  const components = useSelector((state) => state.project.components);
   const [height, setHeight] = useState(selected_component.height);
   const [width, setWidth] = useState(selected_component.width);
   const [x, setX] = useState(selected_component.x);
@@ -53,7 +53,7 @@ export default function PositionSidebar() {
     }
   }, [height, width, x, y]);
 
-  const canvas = useSelector((state) => state.current_project.canvas);
+  const canvas = useSelector((state) => state.project.canvas);
 
   const [alignDisabled, setAlignDisabled] = useState(true);
   const [hwDisabled, setHwDisabled] = useState(true);

@@ -1,6 +1,5 @@
 import domtoimage from "dom-to-image-more";
 import axios from "axios";
-import * as api from "../../api";
 import * as projectApi from "../../api/projectAPI";
 
 export function updateCurrentProject(data) {

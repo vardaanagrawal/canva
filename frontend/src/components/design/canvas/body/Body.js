@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./body.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedComponent } from "../../../../redux/actions/selectedComponentActions";
+import { setSelectedComponent } from "../../../../redux/actions/x6ComponentActions";
 
 import { Rnd } from "react-rnd";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
 
 export default function Body({ zoom }) {
   const dispatch = useDispatch();
-  const canvas = useSelector((state) => state.current_project.canvas);
-  const components = useSelector((state) => state.current_project.components);
-  const selected_component = useSelector((state) => state.selected_component);
+  const canvas = useSelector((state) => state.project.canvas);
+  const components = useSelector((state) => state.project.components);
+  const selected_component = useSelector((state) => state.component);
   const [text, setText] = useState(selected_component.text);
   useEffect(() => {
     if (selected_component.component_type === 3) {

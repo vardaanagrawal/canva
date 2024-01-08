@@ -1,12 +1,12 @@
 import React from "react";
 import { colors, gradient_colors } from "../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { manageElement } from "../../../../redux/actions/currentProjectActions";
+import { manageElement } from "../../../../redux/actions/x5ProjectActions";
 
 export default function ColorSidebar() {
-  const selected_component = useSelector((state) => state.selected_component);
-  const canvas = useSelector((state) => state.current_project.canvas);
-  const components = useSelector((state) => state.current_project.components);
+  const selected_component = useSelector((state) => state.component);
+  const canvas = useSelector((state) => state.project.canvas);
+  const components = useSelector((state) => state.project.components);
   const dispatch = useDispatch();
 
   function handleClick(color) {

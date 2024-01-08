@@ -6,7 +6,12 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../../images/logo.svg";
 import SpinLoader from "../../utils/spinLoader/SpinLoader";
 // functions
-import { createNewProject } from "../../../redux/actions/projectActions";
+import {
+  copyProject,
+  createNewProject,
+} from "../../../redux/actions/x2ProjectsActions";
+// utils
+import { newProjectsList } from "./utils";
 
 export default function Navbar() {
   const [profileDropdown, setProfileDropdown] = useState(false);
@@ -32,7 +37,9 @@ export default function Navbar() {
     }
   };
   document.addEventListener("mousedown", handleClickOutside);
-
+  const user = useSelector((state) => state.user);
+  const name = user.name.split(" ");
+  const nameInitials = name.map((word) => word.charAt(0)).join("");
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -60,7 +67,7 @@ export default function Navbar() {
               setProfileDropdown(!profileDropdown);
             }}
           >
-            <i className="fa-regular fa-user"></i>
+            {nameInitials}
           </div>
           {profileDropdown && <ProfileDropdown pdRef={pdRef} />}
         </div>
@@ -69,30 +76,10 @@ export default function Navbar() {
   );
 }
 
-const newProjectsList = [
-  {
-    name: "Document (Landscape)",
-    height: 500,
-    width: 750,
-    bg_color: "#ffffff",
-  },
-  {
-    name: "Document (Portrait)",
-    height: 500,
-    width: 350,
-    bg_color: "#ffffff",
-  },
-  {
-    name: "Document (Square)",
-    height: 400,
-    width: 400,
-    bg_color: "#ffffff",
-  },
-];
-
 function CreateDropdown({ cdRef }) {
   const projects = useSelector((state) => state.projects);
   const [loading, setLoading] = useState(-1);
+  const [copyLoading, setCopyLoading] = useState(-1);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -102,7 +89,13 @@ function CreateDropdown({ cdRef }) {
       width: item.width,
       bg_color: item.bg_color,
     };
-    dispatch(createNewProject(newProjectData, navigate, setLoading));
+    await dispatch(createNewProject(newProjectData, navigate));
+    setLoading(-1);
+  }
+
+  async function handleCopyProject(item) {
+    await dispatch(copyProject(item._id));
+    setCopyLoading(-1);
   }
 
   return (
@@ -118,7 +111,15 @@ function CreateDropdown({ cdRef }) {
               handleCreateNewProject(item);
             }}
           >
-            {loading !== index && <div className="create-dd-project-img"></div>}
+            {loading !== index && (
+              <div className="create-dd-project-img">
+                <img
+                  src={item.thumbnail}
+                  alt=""
+                  style={{ height: "100%", width: "100%" }}
+                ></img>
+              </div>
+            )}
             {loading === index && (
               <div
                 style={{
@@ -140,8 +141,34 @@ function CreateDropdown({ cdRef }) {
       {projects.length > 0 && (
         <div className="create-dd-projects-list">
           {projects.map((item, index) => (
-            <div className="create-dd-project" key={item._id}>
-              <div className="create-dd-project-img"></div>
+            <div
+              className="create-dd-project"
+              key={item._id}
+              onClick={() => {
+                setCopyLoading(index);
+                handleCopyProject(item);
+              }}
+            >
+              {copyLoading !== index && (
+                <div className="create-dd-project-img">
+                  <img
+                    src={item.thumbnail}
+                    alt=""
+                    style={{ height: "80%", width: "auto" }}
+                  ></img>
+                </div>
+              )}
+              {copyLoading === index && (
+                <div
+                  style={{
+                    width: "35px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <SpinLoader height={15} width={15} color="black" />
+                </div>
+              )}
               <div className="create-dd-project-name">{item.name}</div>
             </div>
           ))}
