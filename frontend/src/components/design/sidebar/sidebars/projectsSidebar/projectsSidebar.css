@@ -1,0 +1,10 @@
+.projects-sidebar-body{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: white;
+    gap: 20px
+}
+
+.project-sidebar-item-img img{
+    width: 100%;
+}

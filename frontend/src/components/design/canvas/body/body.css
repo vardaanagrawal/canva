@@ -1,0 +1,107 @@
+.canvas-body {
+  height: calc(100% - 140px);
+  width: calc(100% - 40px);
+  padding: 20px;
+  overflow: scroll;
+  display: grid;
+  place-items: center;
+  background-color: #ebecf0;
+}
+.canvas-outer {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.canvas {
+  position: relative;
+  box-shadow: 0 2px 8px rgba(14, 19, 24, 0.07);
+}
+
+.textbox-component-input {
+  text-align: center;
+}
+.textbox-component-input:focus {
+  outline: none;
+}
+
+/* ######################################################################### */
+
+.page-screen {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100000;
+  top: 0;
+  left: 0;
+}
+.page {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------- */
+
+.rnd-top-handle,
+.rnd-bottom-handle,
+.rnd-left-handle,
+.rnd-right-handle,
+.rnd-topLeft-handle,
+.rnd-topRight-handle,
+.rnd-bottomLeft-handle,
+.rnd-bottomRight-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rnd-top-handle-inner {
+  height: 8px;
+  width: 15px;
+  background-color: white;
+  position: relative;
+  top: -2px;
+  border: solid silver 1px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.rnd-bottom-handle-inner {
+  height: 8px;
+  width: 15px;
+  background-color: white;
+  position: relative;
+  bottom: -2px;
+  border: solid silver 1px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.rnd-left-handle-inner {
+  height: 15px;
+  width: 8px;
+  background-color: white;
+  position: relative;
+  left: -2px;
+  border: solid silver 1px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.rnd-right-handle-inner {
+  height: 15px;
+  width: 8px;
+  background-color: white;
+  position: relative;
+  right: -2px;
+  border: solid silver 1px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.rnd-topLeft-handle-inner,
+.rnd-topRight-handle-inner,
+.rnd-bottomLeft-handle-inner,
+.rnd-bottomRight-handle-inner {
+  display: block;
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  border: solid silver 1px;
+  border-radius: 50%;
+}

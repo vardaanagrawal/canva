@@ -1,0 +1,416 @@
+.design-navbar {
+  height: 50px;
+  background: linear-gradient(to right, #00c4cc, #8b3dff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 2vw;
+  position: relative;
+}
+.dn-left-menu,
+.dn-right-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* background-color: red; */
+}
+.dn-mobile-menu-btn {
+  display: flex;
+  color: white;
+  height: 35px;
+  width: 35px;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  border-radius: 3px;
+  cursor: pointer;
+  /* background-color: orange; */
+}
+.dn-mobile-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.dn-title input {
+  color: white;
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  height: 35px;
+  padding: 0px 10px;
+  border-radius: 3px;
+  min-width: 20px;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: end;
+}
+.dn-title input::placeholder {
+  color: whitesmoke;
+}
+.dn-title input:hover {
+  outline: solid silver 1px;
+}
+.dn-title input:focus {
+  outline: solid white 1px;
+}
+.dn-save-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  height: 35px;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 10px;
+}
+.dn-save-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.dn-save-btn:active {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.dn-share-btn {
+  background-color: white;
+  height: 35px;
+  padding: 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 10px;
+  position: relative;
+}
+.dn-share-btn:hover {
+  background-color: whitesmoke;
+}
+.dn-share-btn:active {
+  background-color: silver;
+}
+
+.share-dd {
+  position: absolute;
+  width: 96vw;
+  max-width: 350px;
+  top: 48px;
+  right: 2vw;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  border-radius: 3px;
+  z-index: 10;
+  padding: 20px 10px;
+}
+.share-dd-title {
+  margin-bottom: 30px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.share-dd-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: solid 1px silver;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.share-dd-copy-link-btn{
+  background-color: #8b3dff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.share-dd-download-btn{
+  border: solid #8b3dff 2px;
+  border-radius: 5px;
+  padding: 5px 0px;
+  color: #8b3dff;
+text-align: center;
+}
+
+/* ########################################################################################## */
+
+.undo-redo-btns {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.undo-btn,
+.redo-btn {
+  color: white;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.undo-btn:hover,
+.redo-btn:hover {
+  background-color: rgba(245, 245, 245, 0.2);
+}
+.undo-btn:active,
+.redo-btn:active {
+  background-color: rgba(245, 245, 245, 0.4);
+}
+/* =============================================================== */
+
+@media only screen and (max-width: 600px) {
+  .dn-title {
+    display: none;
+  }
+  .dn-mobile-menu-btn {
+    display: flex;
+  }
+  .dn-right-menu {
+    gap: 5px;
+  }
+  .dn-share-btn,
+  .dn-save-btn {
+    background-color: transparent;
+    color: white;
+    font-size: larger;
+    width: 35px;
+    padding: 0px 0px;
+  }
+  .dn-share-btn:hover {
+    background-color: #7d38e4;
+  }
+  .dn-share-btn:active {
+    background-color: transparent;
+  }
+  .dn-share-btn-text,
+  .dn-save-btn-text {
+    display: none;
+  }
+}
+
+.dn-home-btn,
+.dn-file-btn {
+  height: 35px;
+  color: white;
+  padding: 0px 10px;
+  line-height: 35px;
+  cursor: pointer;
+  border-radius: 3px;
+  position: relative;
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.dn-home-btn {
+  width: 50px;
+}
+.dn-home-btn:hover,
+.dn-file-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.dn-home-btn:active,
+.dn-file-btn:active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ################################################################################################### */
+
+.left-bar-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(28, 39, 48, 0.5);
+  z-index: 10;
+}
+.left-bar {
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  background-color: white;
+  position: relative;
+  left: -350px;
+  transition: all 0.3s;
+}
+.left-bar-head {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 5% 0px;
+  border-bottom: solid silver 1px;
+}
+.left-bar-close-btn {
+  height: 24px;
+  width: 24px;
+  padding: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.left-bar-close-btn:hover {
+  background-color: whitesmoke;
+}
+.left-bar-create-btn {
+  margin: 10px;
+  background-color: #8b3dff;
+  color: white;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.left-bar-create-btn:hover {
+  background-color: #7d38e4;
+}
+
+.left-bar-body {
+  padding: 10px;
+  height: calc(100vh - 60px - 60px - 20px);
+  overflow: scroll;
+}
+
+.left-bar-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0px 15px;
+  font-size: small;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 10px 0px;
+}
+.left-bar-item:hover {
+  background-color: whitesmoke;
+}
+.left-bar-label {
+  height: 40px;
+  font-size: small;
+  font-weight: 600;
+  padding: 0px 15px;
+  line-height: 40px;
+}
+
+/* ################################################################################################### */
+
+.file-dd {
+  position: absolute;
+  width: 96vw;
+  max-width: 350px;
+  top: 48px;
+  left: 2vw;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  border-radius: 3px;
+  z-index: 10;
+}
+
+.file-dd-name {
+  padding: 10px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-bottom: solid silver 1px;
+}
+.file-dd-name input {
+  display: block;
+  height: 35px;
+  width: calc(100%);
+  border: none;
+  font-size: larger;
+  font-weight: 600;
+  border-bottom: solid 1px transparent;
+}
+.file-dd-name input:hover {
+  border-bottom: solid silver 1px;
+}
+.file-dd-name input:focus {
+  outline: none;
+  border-bottom: solid black 1px;
+}
+.file-dd-user {
+  font-size: 12px;
+  color: grey;
+}
+.file-dd-user svg {
+  height: 10px;
+  width: 10px;
+}
+.file-dd-section2 {
+  padding: 10px 0px;
+  border-bottom: solid silver 1px;
+}
+.file-dd-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 40px;
+  padding: 0px 15px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.file-dd-item:hover {
+  background-color: whitesmoke;
+}
+.file-dd-item svg {
+  height: 25px;
+  width: 25px;
+}
+.file-dd-section3 {
+  padding: 10px 0px;
+}
+.file-dd-page-title {
+  padding: 10px 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.file-dd-page-body {
+  max-height: 300px;
+  overflow: scroll;
+  padding: 0px 0px 10px;
+}
+
+.left-bar-create-list {
+  position: absolute;
+  background-color: white;
+  height: 50vh;
+  width: 95vw;
+  max-width: 400px;
+  overflow: scroll;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  border-radius: 5px;
+  padding: 10px 0px;
+}
+.left-bar-create-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: small;
+  height: 40px;
+  cursor: pointer;
+  padding: 0px 10px;
+}
+.left-bar-create-item:hover {
+  background-color: whitesmoke;
+}
+.left-bar-create-item-size {
+  color: silver;
+}

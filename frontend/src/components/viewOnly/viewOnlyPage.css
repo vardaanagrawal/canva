@@ -1,0 +1,7 @@
+.vo-page {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* box-shadow: rgb(218, 218, 218) 1px 1px 10px 10px; */
+}

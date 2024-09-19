@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Dancing+Script&family=Dhurjati&family=Homemade+Apple&family=Monoton&family=Poppins&family=Rock+Salt&family=Shrikhand&family=Silkscreen&family=Whisper&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam&family=Orbitron&family=Roboto&family=Satisfy&family=Silkscreen&family=Whisper&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playball&display=swap");
+* {
+  margin: 0px;
+  font-family: "Poppins", sans-serif;
+  -moz-user-select: none; /* firefox */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE*/
+  user-select: none; /* Standard syntax */
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* :root {
+  --c1-light: rgb(30, 30, 30);
+  --c2: white;
+  --c3: #5755d9;
+  --c4: silver;
+  --c5: #f1f1fc;
+} */
+
+.btn-1 {
+  background-color: #8b3dff;
+  color: white;
+  height: 40px;
+  padding: 0px 15px;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-1:hover {
+  background-color: #7d38e4;
+}
+.btn-1:active {
+  background-color: #692ac9;
+}
+
+.btn-2 {
+  background-color: white;
+  color: black;
+  height: 40px;
+  padding: 0px 15px;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid rgb(215 218 222) 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-2:hover {
+  background-color: whitesmoke;
+}
+.btn-2:active {
+  background-color: rgba(235, 235, 235);
+}
+
+/* ############################################################# */
+
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Kalnia+Glaze:wght@100..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Slackey&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Danfo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AR:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Wendy+One&display=swap');

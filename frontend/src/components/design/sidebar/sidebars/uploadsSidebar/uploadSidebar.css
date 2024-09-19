@@ -1,0 +1,18 @@
+#upload-file-input {
+  display: none;
+}
+.upload-file-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  background-color: blueviolet;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.uploads-sidebar-title {
+  margin: 20px 0px 10px;
+}

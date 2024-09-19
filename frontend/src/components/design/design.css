@@ -1,0 +1,44 @@
+.design {
+  height: 100vh;
+  width: 100vw;
+}
+.workArea {
+  height: calc(100vh - 50px);
+  display: flex;
+}
+.sidebar-container {
+  color: white;
+  height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .workArea {
+    flex-direction: column-reverse;
+  }
+  .sidebar-container {
+    height: 70px;
+  }
+}
+
+.project-not-found-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px
+}
+.project-not-found-page .logo img {
+  height: 50px;
+}
+.project-not-found-page .one {
+  font-size: xx-large;
+  font-weight: 600;
+}
+.project-not-found-page .two {
+  text-align: center;
+}
+
+.project-not-found-page a{
+  color:blueviolet
+}

@@ -1,0 +1,68 @@
+.add-text-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  background-color: blueviolet;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.text-sidebar-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0px;
+}
+
+.text-sidebar-item {
+  background-color: rgb(52 53 54);
+  aspect-ratio: 5/4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.text-sidebar-title {
+  margin: 20px 0px 0px 0px;
+}
+
+.def-text-btn-1,
+.def-text-btn-2,
+.def-text-btn-3 {
+  height: 40px;
+  border: solid rgb(117, 117, 117) 1px;
+  border-radius: 5px;
+  margin: 8px 0px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  cursor: pointer;
+  padding-left: 10px;
+}
+.def-text-btn-1:hover,
+.def-text-btn-2:hover,
+.def-text-btn-3:hover {
+  background-color: rgba(245, 245, 245, 0.1);
+}
+.def-text-btn-1:active,
+.def-text-btn-2:active,
+.def-text-btn-3:active {
+  background-color: rgba(245, 245, 245, 0.15);
+}
+
+.def-text-btn-1 {
+  font-size: x-large;
+  font-weight: 700;
+  height: 55px;
+}
+
+.def-text-btn-2 {
+  font-size: larger;
+  font-weight: 550;
+  height: 48px;
+}

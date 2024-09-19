@@ -1,0 +1,126 @@
+.project-card-outer {
+  position: relative;
+  max-width: 400px;
+}
+.project-card {
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+.project-card-img {
+  background-color: rgba(245, 245, 245, 0.5);
+  width: calc(100% - 20px);
+  aspect-ratio: 4/3;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 10px;
+  border: solid silver 1px;
+}
+.project-card-outer:hover .project-card-img {
+  background-color: rgb(234, 234, 234);
+}
+.project-card-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.project-card-img-dark {
+  background-color: #28292b;
+  border-color: #464749;
+}
+.project-card-outer:hover .project-card-img-dark {
+  background-color: #222324;
+  border-color: #464749;
+}
+.project-option-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 30px;
+  width: 30px;
+  border-radius: 3px;
+}
+.project-card-name {
+  height: 22px;
+  width: 80%;
+  font-size: small;
+  font-weight: 600;
+  overflow: hidden;
+}
+.project-folder-tag {
+  font-size: x-small;
+  background-color: whitesmoke;
+  color: gray;
+  width: max-content;
+  border-radius: 2px;
+  height: 16px;
+  max-width: 130px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0px 3px;
+  gap: 2px;
+}
+.project-folder-tag svg {
+  height: 15px;
+  width: 15px;
+}
+.project-option-btn:hover {
+  background-color: #8b3dff;
+  color: white;
+}
+
+.projects-list {
+  font-size: 14px;
+}
+.project-list-head {
+  display: grid;
+  grid-template-columns: 5fr 3fr 2fr 30px;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: solid silver 1px;
+  font-weight: 600;
+}
+.project-list-item {
+  height: 60px;
+  border-bottom: solid silver 1px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 5fr 3fr 2fr 30px;
+  gap: 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+.project-list-item:hover {
+  background-color: whitesmoke;
+}
+.project-list-item-cell {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+.project-list-name-cell {
+  font-weight: 600;
+}
+.project-list-options-cell {
+  height: 30px;
+  width: 30px;
+  margin: auto;
+  overflow: visible;
+}
+
+@media only screen and (max-width: 800px) {
+  .project-list-item,
+  .project-list-head {
+    grid-template-columns: 1fr 30px;
+  }
+  .project-list-folder-cell,
+  .project-list-type-cell {
+    display: none;
+  }
+}

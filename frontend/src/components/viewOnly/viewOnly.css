@@ -1,0 +1,68 @@
+.view-only {
+  height: 100vh;
+  width: 100vw;
+}
+
+.vo-nav {
+  height: 50px;
+  background: linear-gradient(to right, #00c4cc, #8b3dff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 2vw;
+  position: relative;
+  color: white;
+}
+
+.vo-body {
+  background-color: #ebecf0;
+  height: calc(100vh - 140px);
+  overflow: scroll;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.vo-foot {
+  height: 50px;
+  background-color: #ebecf0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px;
+}
+.vo-foot-right{
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center
+}
+
+.page-list {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100px;
+  padding: 10px 25px;
+  /* width: calc(100% - 100px); */
+  background-color: white;
+  /* backdrop-filter: blur(5px); */
+  z-index: 10;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  box-shadow: rgba(103, 103, 103, 0.2) 1px 1px 10px 10px;
+}
+
+.page-list-item {
+  height: 70px;
+  border: solid silver 2px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.page-list-item:hover {
+  border-color: blueviolet;
+}

@@ -1,0 +1,54 @@
+.note-sidebar-body{
+    height: 90%;
+}
+.notes-letter-count {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: small;
+  color: silver;
+}
+
+.notes-text-area {
+  resize: none;
+  height: 90%;
+  width: 100%;
+  padding: 10px 0px;
+  border: none;
+  color: silver;
+  background: none;
+  font-size: large;
+}
+.notes-text-area:focus {
+  outline: none;
+}
+
+.notes-sidebar-name-form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: small;
+  gap: 5px;
+}
+.notes-sidebar-name-form label {
+  display: block;
+  height: 100%;
+  line-height: 50px;
+}
+
+.notes-sidebar-name-input {
+  height: 100%;
+  width: calc(100% - 70px);
+  padding: 0px;
+  border: none;
+  background-color: transparent;
+  color: white;
+  text-overflow: ellipsis;
+}
+.notes-sidebar-name-input::placeholder {
+  color: white;
+}
+.notes-sidebar-name-input:focus {
+  outline: none;
+}

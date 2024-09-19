@@ -1,0 +1,43 @@
+.custom-color-btn,
+.transparent-color-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.custom-color-btn img {
+  height: 100%;
+  width: 100%;
+}
+.custom-color-picker {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  z-index: 10;
+}
+.color-sidebar-body {
+  /* border-bottom: solid gray 1px; */
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 15px 5px;
+  position: relative;
+  /* background-color: red; */
+  margin-bottom: 30px;
+}
+.color-sidebar-item {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.color-sidebar-title{
+  font-size: small;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px
+}

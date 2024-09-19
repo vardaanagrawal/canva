@@ -1,0 +1,213 @@
+.options-btn-box {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+.options-btn {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 3px;
+  transform: rotate(90deg);
+  border: solid rgb(215, 218, 222, 0.5) 1px;
+}
+.options-btn-dark{
+  background-color: #18191b;
+  border-color: #18191b;
+}
+.options-btn:hover {
+  background-color: #8b3dff;
+  color: white;
+}
+.options-dd {
+  max-height: 300px;
+  width: 300px;
+  position: absolute;
+  background: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  z-index: 2;
+  border-radius: 3px;
+  color: black;
+}
+.options-dd-mobile {
+  display: block;
+  max-height: 400px;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  border-radius: 20px 20px 0px 0px;
+  z-index: 2;
+  color: black;
+  border-top: solid silver 1px;
+  padding-top: 10px;
+}
+
+/* ################################################################################################# */
+
+.options-dd-box {
+  height: 100%;
+  cursor: default;
+  position: relative;
+}
+.options-dd-page1,
+.options-dd-page2 {
+  height: 100%;
+  width: 100%;
+}
+
+.options-dd-head {
+  height: 60px;
+  padding: 10px;
+  border-bottom: solid silver 1px;
+}
+.options-dd-head-section1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.options-dd-head-section1 svg {
+  height: 30px;
+}
+.options-dd-name-input {
+  height: 30px;
+  width: calc(100% - 50px);
+  padding: 0px 5px;
+  border: none;
+  font-size: large;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  border-bottom: dashed transparent 1px;
+}
+.options-dd-name-input:hover {
+  border-bottom: dashed silver 1px;
+}
+.options-dd-name-input:focus {
+  outline: none;
+  border-bottom: dashed silver 1px;
+  width: calc(100% - 10px);
+}
+.options-dd-head-section2 {
+  font-size: x-small;
+  color: silver;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+.options-dd-head-section2 svg {
+  height: 15px;
+  width: 20px;
+}
+
+.options-dd-body {
+  height: calc(100% - 100px);
+  padding: 10px 0px;
+  overflow: scroll;
+}
+.options-dd-item {
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+  font-size: 15px;
+  position: relative;
+}
+.options-dd-item:hover {
+  background-color: whitesmoke;
+}
+.options-dd-item-icon {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+}
+.options-dd-item-icon svg {
+  height: 24px;
+  width: 24px;
+}
+.options-dd-item-text {
+  text-wrap: nowrap;
+  overflow: hidden;
+  max-width: calc(100% - 60px);
+  text-overflow: ellipsis;
+}
+.options-dd-right {
+  position: absolute;
+  right: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ------------------------------------------------------------- */
+.options-dd-page2-head {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0px 5px;
+  gap: 10px;
+  font-weight: 600;
+  font-size: large;
+}
+.options-dd-back-btn {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.options-dd-back-btn:hover {
+  background-color: whitesmoke;
+}
+.options-dd-page2-body {
+  height: 170px;
+  overflow: scroll;
+  padding: 10px 0px;
+}
+.options-dd-page2-empty-body {
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.options-dd-page2-foot {
+  height: 60px;
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+.options-dd-page2-foot button {
+  height: 40px;
+  border: none;
+  font-size: 12px;
+  padding: 0px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.move-to-folder-btn {
+  background-color: #8b3dff;
+  color: white;
+  width: 120px;
+}
+.move-to-folder-btn:disabled {
+  background-color: whitesmoke;
+  color: grey;
+  cursor: not-allowed;
+}
+.create-new-folder-btn {
+  background-color: transparent;
+}

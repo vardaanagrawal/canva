@@ -1,0 +1,60 @@
+.dashboard {
+  height: 100vh;
+}
+.dashboard-dark {
+  background-color: #18191b;
+  color: white;
+}
+.dashboard-bottom {
+  padding-top: 71px;
+  display: flex;
+}
+.dashboard-bottom .sidebar-container {
+  height: calc(100vh - 71px);
+  width: 275px;
+  overflow: scroll;
+}
+.outlet {
+  height: calc(100vh - 71px);
+  width: calc(100% - 275px);
+  overflow: scroll;
+}
+.mobile-nav {
+  height: 49px;
+  width: 100%;
+  background-color: white;
+  border-top: solid silver 1px;
+  display: none;
+}
+.mobile-nav-dark {
+  background-color: #18191b;
+  border-color: #464749;
+}
+
+.mobile-nav a {
+  color: black;
+  height: 25px;
+}
+.mobile-nav-dark a {
+  color: white;
+}
+
+@media only screen and (max-width: 650px) {
+  .dashboard-bottom {
+    flex-direction: column;
+    padding-top: 0px;
+  }
+  .dashboard-bottom .sidebar-container {
+    display: none;
+  }
+  .outlet {
+    height: calc(100vh - 50px);
+    width: 100%;
+  }
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: x-large;
+  }
+}

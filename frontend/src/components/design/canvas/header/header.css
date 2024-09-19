@@ -1,0 +1,27 @@
+.canvas-header {
+  min-height: 49px;
+  height: 49px;
+  border-bottom: solid silver 1px;
+}
+.canvas-header-inner{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-left-menu{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0px 10px;
+}
+.header-right-menu{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-right: 20px;
+  font-size: 20px !important;
+}

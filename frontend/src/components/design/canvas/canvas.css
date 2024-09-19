@@ -1,0 +1,47 @@
+.canvass {
+  height: 100%;
+  width: 100%;
+  border-top: none;
+  border-bottom: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.design-btn {
+  height: 35px;
+  min-width: 21px;
+  padding: 0px 7px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.design-btn:hover {
+  background-color: rgb(225, 228, 231, 0.5);
+}
+.design-btn:active {
+  background-color: rgba(225, 228, 231);
+}
+.design-btn-active,
+.design-btn-active:hover {
+  background-color: rgba(225, 228, 231);
+}
+
+.design-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .design-btn-text {
+    display: none;
+  }
+}

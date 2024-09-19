@@ -1,0 +1,229 @@
+.navbar {
+  height: 70px;
+  width: 96vw;
+  background-color: white;
+  padding: 0px 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 10;
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 1px 10px 0px;
+}
+.navbar-dark {
+  background-color: #252627;
+}
+.nav-logo img {
+  height: 40px;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media only screen and (max-width: 650px) {
+  .navbar {
+    display: none;
+  }
+}
+/* ########################################################################################################### */
+
+.nav-create-dropdown {
+  position: absolute;
+  background-color: white;
+  border: solid whitesmoke 1px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  right: -65px;
+  top: 50px;
+  width: calc(96vw - 2px);
+  max-width: 350px;
+  border-radius: 5px;
+}
+.nav-create-dropdown-dark {
+  background-color: #252627;
+  border-color: #464749;
+}
+
+.create-dd-title {
+  padding: 10px;
+  font-weight: bold;
+}
+.create-dd-projects-list {
+  max-height: 50vh;
+  overflow: scroll;
+  padding-bottom: 10px;
+  border-bottom: solid silver 1px;
+}
+.create-dd-projects-list:last-of-type {
+  border-bottom: solid silver 0px;
+}
+.create-dd-project {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: small;
+}
+.create-dd-project:hover {
+  background-color: whitesmoke;
+}
+.create-dd-project-dark:hover {
+  background-color: #343536;
+}
+.create-dd-project:active {
+  background-color: rgb(240, 240, 240);
+}
+.create-dd-project-dark:active {
+  background-color: #2c2e2f;
+}
+.create-dd-project-img {
+  height: 20px;
+  width: 35px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-dd-foot {
+  padding: 15px 10px 10px;
+  display: flex;
+  gap: 5px;
+}
+.create-dd-foot-custom-btn {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.create-dd-custom-btn-img {
+  height: 55px;
+  width: 55px;
+  padding: 10px;
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.create-dd-custom-btn-img-dark {
+  background-color: #343536;
+}
+.create-dd-custom-btn-img:hover {
+  background-color: rgb(222, 222, 222);
+}
+.create-dd-custom-btn-img-dark:hover {
+  background-color: #343536;
+}
+.create-dd-custom-btn-text {
+  font-size: smaller;
+}
+.custom-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.create-dd-size {
+  font-size: smaller;
+  color: silver;
+  display: none;
+}
+.create-dd-project:hover .create-dd-size {
+  display: block;
+}
+
+/* ########################################################################################################### */
+.nav-profile-btn {
+  height: 45px;
+  width: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  font-size: large;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(0, 126, 182);
+  overflow: hidden;
+}
+.nav-profile-btn:active {
+  background-color: rgb(20, 167, 230);
+}
+.nav-profile-btn img {
+  width: 100%;
+}
+.nav-profile-dropdown {
+  background-color: white;
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0px;
+  border: solid whitesmoke 1px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+  border-radius: 5px;
+  width: calc(96vw - 2px);
+  max-width: 350px;
+  z-index: 10000000;
+}
+.nav-profile-dropdown-dark {
+  background-color: #252627;
+  border-color: #464749;
+}
+
+.nav-profile-dropdown a {
+  text-decoration: none;
+}
+.profile-dropdown-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 50px;
+  padding: 20px 10px;
+  font-weight: 600;
+  border-bottom: solid silver 1px;
+}
+.profile-dropdown-img {
+  height: 60px;
+  width: 60px;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: x-large;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(0, 126, 182);
+  display: grid;
+  place-items: center;
+}
+.profile-dropdown-img img {
+  width: 100%;
+}
+.profile-dropdown-bottom {
+  padding: 10px 0px;
+}
+.profile-dropdown-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  /* transition: all 0.3s ease; */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: black;
+  text-decoration: none;
+}
+.profile-dropdown-item:hover {
+  background-color: whitesmoke;
+}
+.profile-dropdown-item:active {
+  background-color: rgb(240, 240, 240);
+}
+.profile-dropdown-item-dark {
+  color: white;
+}
+.profile-dropdown-item-dark:hover {
+  background-color: #343536;
+}

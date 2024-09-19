@@ -1,0 +1,141 @@
+.position-sidebar-title {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  font-size: 15px;
+  position: relative;
+  border-bottom: 0px;
+}
+.position-sidebar-title-item {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.position-sidebar-title-marker {
+  height: 2px;
+  width: calc(50% - 15px);
+  background-color: #8b3dff;
+  border-radius: 10px;
+  position: absolute;
+  left: 15px;
+  bottom: 0;
+  transition: all 0.3s;
+}
+
+.position-sidebar-body {
+  height: calc(100% - 50px);
+  padding: 0px;
+  background-color: blue;
+}
+.position-sidebar-body-item {
+  border-bottom: solid rgb(100, 100, 100) 1px;
+  padding: 10px 5px;
+}
+.position-sidebar-mini-title {
+  font-size: small;
+  color: grey;
+  padding: 5px 10px;
+}
+.position-sidebar-align {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.position-sidebar-align-item {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.position-sidebar-align-item:hover {
+  background-color: rgb(66, 66, 66);
+}
+
+.position-sidebar-advanced {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+.position-sidebar-advanced-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.position-sidebar-advanced-input {
+  width: calc(100% - 24px);
+  height: 40px;
+  background: none;
+  border: solid silver 1px;
+  border-radius: 5px;
+  color: silver;
+  padding: 0px 10px;
+}
+.position-align-item-disabled {
+  cursor: not-allowed;
+  color: silver;
+}
+.position-advanced-disabled {
+  cursor: not-allowed;
+  color: silver;
+}
+
+.position-advanced-input-disabled {
+  border: solid 1px darkgray;
+  cursor: not-allowed;
+}
+.position-align-item-disabled:hover {
+  background-color: rgb(44, 44, 44);
+}
+
+.sidebar2-arrange-body,
+.sidebar2-layers-body {
+  overflow: scroll;
+  padding: 0px 0px 30px;
+}
+.arrange-body {
+  position: relative;
+  left: -30px;
+  opacity: 0.1;
+  transition: all 0.3s ease-out;
+}
+.layers-body {
+  position: relative;
+  right: -30px;
+  opacity: 0.1;
+  transition: all 0.3s ease-out;
+}
+.layers-sidebar-item {
+  height: 70px;
+  width: 100%;
+  margin: 10px 0px;
+  border: solid silver 1px;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.move-up-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.move-down-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}

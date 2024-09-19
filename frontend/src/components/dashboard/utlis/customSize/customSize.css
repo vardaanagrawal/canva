@@ -1,0 +1,99 @@
+.custom-size-box {
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+.custom-size-title {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.custom-size-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px 10px;
+  font-size: small;
+}
+.custom-size-inputs input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.custom-size-inputs input {
+  -moz-appearance: textfield;
+}
+.custom-size-inputs input,
+.custom-size-inputs select {
+  height: 35px;
+  width: calc(100% - 22px);
+  padding: 0px 10px;
+  border: solid gray 1px;
+  border-radius: 3px;
+}
+.custom-size-inputs select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+}
+.custom-size-inputs select {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDedovnlWUPFOn1C7ryewmpG_XIZsRTL5vIQ&usqp=CAU");
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;
+  cursor: pointer;
+}
+.custom-size-inputs input:focus,
+.custom-size-inputs select:focus {
+  outline: none;
+  border: solid #8b3dff 1px;
+}
+.custom-size-create-btn {
+  background-color: #8b3dff;
+  color: white;
+  text-align: center;
+  margin: 15px 0px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.custome-size-create-btn-disabled {
+  background-color: silver;
+  cursor: not-allowed;
+}
+.custom-size-err-box {
+  font-size: x-small;
+  margin: 5px 0px;
+  letter-spacing: 0.5px;
+  color: red;
+}
+
+.custom-suggested-box {
+  /* background-color: red; */
+  font-size: small;
+  /* color: gray; */
+}
+.custom-suggested-title {
+  font-weight: 600;
+  margin-top: 30px;
+}
+.custom-suggested-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0px;
+  cursor: pointer;
+  height: 40px;
+  width: 100%;
+  padding: 0px 10px;
+  margin-left: -10px;
+}
+.custom-suggested-item:hover {
+  background-color: whitesmoke;
+}
+.custom-suggested-item-icon svg {
+  width: 25px;
+  height: 25px;
+  margin-top: 7px;
+}
