@@ -21,7 +21,7 @@ const FolderRoutes = require("./backend/routes/x3FolderRoutes");
 const UploadRoutes = require("./backend/routes/x4UploadRoutes");
 
 app.use("/test", (req, res) => {
-  res.send("hello world");
+  res.send(process.env.MAILER_EMAIL);
 });
 app.use("/api/auth", AuthRoutes);
 app.use("/api/user", UserRoutes);
